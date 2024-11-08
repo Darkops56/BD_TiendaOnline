@@ -4,109 +4,20 @@
 
 ```mermaid
 erDiagram
-    Pais {
-        INT idPais
-        VARCHAR nombre
-    }
-
-    Ubicacion {
-        INT idUbicacion
-        VARCHAR direccion
-        VARCHAR ciudad
-        INT idPais
-    }
-
-    Garantia {
-        INT idGarantia
-        VARCHAR nombre
-        DATETIME caducidad
-    }
-
-    Empleador {
-        VARCHAR nombre
-        VARCHAR apellido
-        BIGINT cuil
-    }
-
-    Valoracion {
-        CHAR idValoracion
-        FLOAT valoracion
-    }
-
-    Empleados {
-        CHAR matricula
-        VARCHAR nombre
-        VARCHAR apellido
-        BIGINT cuil
-    }
-
-    Categorias {
-        INT idCategoria
-        VARCHAR nombre
-    }
-
-    Usuario {
-        BIGINT idUsuario
-        VARCHAR apodo
-        VARCHAR email
-        VARCHAR ubicacion
-        INT idPais
-    }
-
-    Comentario {
-        INT idComentario
-        BIGINT idUsuario
-        CHAR idValoracion
-        VARCHAR comentario
-    }
-
-    Clientes {
-        CHAR dni
-        VARCHAR nombre
-        VARCHAR apellido
-        BIGINT idUsuario
-    }
-
     Contrato {
         INT idContrato
-        CHAR matricula
+        CHAR(7) matricula
         DATE fechaInicio
         DATE fechaFin
         MEDIUMINT salario
         BIGINT cuil
     }
 
-    Productos {
+    Envios {
+        CHAR(7) matricula
+        DATETIME fechaEnvio
         INT idProducto
-        VARCHAR nombre
-        DECIMAL precio
-        INT stock
-        VARCHAR descripcion
-        BIGINT cuil
-        INT idGarantia
-        INT idCategoria
-    }
-
-    Inventario {
-        INT idProducto
-        INT idInventario
-        MEDIUMINT cantidad
-        DATE fechaIngreso
-    }
-
-    Pedidos {
-        INT idPedido
-        INT idProducto
-        CHAR dni
-        DATETIME fechaPedido
-        VARCHAR direccion
-    }
-
-    Pedidos_Productos {
-        INT idPedidosProductos
-        INT idPedido
-        INT idProducto
-        TINYINT cantidad
+        INT idEnvio
     }
 
     HistorialCompra {
@@ -118,51 +29,138 @@ erDiagram
         DATE fecha
     }
 
+    Clientes {
+        CHAR(8) dni
+        VARCHAR(50) nombre
+        VARCHAR(50) apellido
+        BIGINT idUsuario
+    }
+
+    Valoracion {
+        CHAR(8) idValoracion
+        FLOAT valoracion
+    }
+
+    Pedidos {
+        INT idPedido
+        INT idProducto
+        CHAR(8) dni
+        DATETIME fechaPedido
+        VARCHAR(100) direccion
+    }
+
+    Productos {
+        INT idProducto
+        VARCHAR(50) nombre
+        DECIMAL(10) precio
+        INT stock
+        VARCHAR(5000) descripcion
+        BIGINT cuil
+        INT idGarantia
+        INT idCategoria
+    }
+
+    Ubicacion {
+        INT idUbicacion
+        VARCHAR(40) direccion
+        VARCHAR(20) ciudad
+        INT idPais
+    }
+
+    Pais {
+        INT idPais
+        VARCHAR(50) nombre
+    }
+
+    Inventario {
+        INT idProducto
+        INT idInventario
+        MEDIUMINT cantidad
+        DATE fechaIngreso
+    }
+
+    Usuario {
+        BIGINT idUsuario
+        VARCHAR(20) apodo
+        VARCHAR(40) email
+        VARCHAR(100) ubicacion
+        INT idPais
+    }
+
+    Empleados {
+        CHAR(7) matricula
+        VARCHAR(50) nombre
+        VARCHAR(50) apellido
+        BIGINT cuil
+    }
+
+    Empleador {
+        VARCHAR(50) nombre
+        VARCHAR(50) apellido
+        BIGINT cuil
+    }
+
     Comprobante {
         INT numeroDeReferencia
         INT idPedido
-        CHAR dni
+        CHAR(8) dni
         DATE fecha
         MEDIUMINT montoTotal
     }
 
-    Envios {
-        CHAR matricula
-        DATETIME fechaEnvio
+    Pedidos_Productos {
+        INT idPedidosProductos
+        INT idPedido
         INT idProducto
-        INT idEnvio
+        TINYINT cantidad
+    }
+
+    Categorias {
+        INT idCategoria
+        VARCHAR(50) nombre
+    }
+
+    Comentario {
+        INT idComentario
+        BIGINT idUsuario
+        CHAR(8) idValoracion
+        VARCHAR(300) comentario
     }
 
     Carrito {
         INT idCarrito
-        DECIMAL precioTotal
+        DECIMAL(10) precioTotal
         INT idProducto
         INT idPedido
     }
 
-    Pais ||--o| Ubicacion: "Tiene"
-    Pais ||--o| Usuario: "Tiene"
-    Empleador ||--o| Productos: "Ofrece"
-    Empleador ||--o| Contrato: "Contrata"
-    Empleador ||--o| Envios: "Envía"
-    Garantia ||--o| Productos: "Cubre"
-    Valoracion ||--o| Comentario: "Es evaluado por"
-    Comentario ||--o| Usuario: "Es escrito por"
-    Comentario ||--o| Valoracion: "Tiene"
-    Clientes ||--o| Usuario: "Es un"
-    Productos ||--o| Pedidos: "Es parte de"
-    Productos ||--o| Inventario: "Está en"
-    Productos ||--o| Pedidos_Productos: "Está en"
-    Productos ||--o| HistorialCompra: "Aparece en"
-    Productos ||--o| Envios: "Es enviado"
-    Productos ||--o| Carrito: "Está en"
-    Pedidos ||--o| Clientes: "Es realizado por"
-    Pedidos ||--o| Comprobante: "Es registrado en"
-    Pedidos ||--o| HistorialCompra: "Está en"
-    Pedidos ||--o| Pedidos_Productos: "Contiene"
-    Pedidos_Productos ||--o| Productos: "Contiene"
-    HistorialCompra ||--o| Ubicacion: "En"
-    Carrito ||--o| Pedidos: "Está asociado con"
+    Garantia {
+        INT idGarantia
+        VARCHAR(50) nombre
+        DATETIME caducidad
+    }
+
+    Contrato ||--o{ Envios : ""
+    Contrato ||--|{ Empleados : ""
+    Envios ||--|| Ubicacion : ""
+    HistorialCompra }o--|| Pedidos : ""
+    HistorialCompra }o--|| Ubicacion : ""
+    Clientes }o--o| Usuario : ""
+    Clientes ||--o{ Pedidos : ""
+    Pedidos }o--|| Productos : ""
+    Productos }o--o| Categorias : ""
+    Productos ||--o| Garantia : ""
+    Pedidos ||--o{ Pedidos_Productos : ""
+    Pedidos ||--|| Comprobante : ""
+    Usuario ||--o{ Comentario : ""
+    Usuario }o--|| Pais : ""
+    Comentario }o--|| Valoracion : ""
+    Empleador ||--o{ Empleados : ""
+    Empleados ||--o{ Contrato : ""
+    Ubicacion }o--|| Pais : ""
+    Productos ||--o{ Inventario : ""
+    Carrito ||--o| Productos : ""
+    Carrito ||--|| Pedidos : ""
 ```
 
 ## Consultas SQL: 
@@ -171,55 +169,67 @@ erDiagram
 ### 1) Escribe una consulta que muestre el nombre y apellido de cada cliente junto con el número total de pedidos que ha realizado. Agrupa los resultados por el dni del cliente.
 
 ```sql
-SELECT Categorias.nombre, COUNT(Productos.idProducto) AS total_productos
-FROM Categorias
-LEFT JOIN Productos ON Categorias.idCategoria = Productos.idCategoria
-GROUP BY Categorias.nombre;
-```
-
-### 2) Crea una consulta que muestre el nombre de cada categoría y el total de productos que pertenecen a ella. Agrupa por el nombre de la categoría.
-
-```sql
-SELECT Categorias.nombre, COUNT(Productos.idProducto) AS total_productos
-FROM Categorias
-LEFT JOIN Productos ON Categorias.idCategoria = Productos.idCategoria
-GROUP BY Categorias.nombre;
-```
-
-### 3) Escribe una consulta que muestre el nombre de cada empleador junto con el total de productos que ha registrado cuyo precio esté entre $100 y $500. Agrupar por el cuil.
-
-```sql
-SELECT Empleador.nombre, Empleador.apellido, COUNT(Productos.idProducto) AS total_productos
-FROM Empleador
-LEFT JOIN Productos ON Empleador.cuil = Productos.cuil
-WHERE Productos.precio BETWEEN 100 AND 500
-GROUP BY Empleador.cuil;
+SELECT
+	c.nombre AS nombre_cliente,
+	c.apellido AS apellido_cliente,
+	COUNT(p.idPedido) AS total_pedidos
+FROM Clientes c
+JOIN Pedidos p ON c.dni = p.dni 
+GROUP BY c.dni;
 
 ```
 
-### 4) Escribe una consulta que devuelva el apodo de cada usuario y la valoración promedio de sus comentarios, siempre que la valoración sea mayor a 3. Agrupar los resultados por id usuario
+### 2) Escribe una consulta que muestre el nombre de cada empleador junto con el total de productos que ha registrado cuyo precio esté entre $100 y $500. Agrupar por el cuil.
 
 ```sql
-SELECT Usuario.apodo, AVG(Valoracion.valoracion) AS valoracion_promedio
-FROM Usuario
-JOIN Comentario ON Usuario.idUsuario = Comentario.idUsuario
-JOIN Valoracion ON Comentario.idValoracion = Valoracion.idValoracion
-WHERE Valoracion.valoracion > 3
-GROUP BY Usuario.idUsuario;
+SELECT
+    c.nombre AS nombre_categoria, 
+    COUNT(p.idProducto) AS total_productos
+FROM Categorias c
+JOIN Productos p ON c.idProducto = p.idProducto
+GROUP BY c.nombre;
+
 ```
 
-### 5) Escribe una consulta que muestre el nombre y apellido de cada cliente junto con el monto total de sus pedidos, solo si ese total es mayor a $500. Utiliza LEFT JOIN para unir Clientes y Pedidos, y agrupa los resultados por dni del cliente. Asegúrate de aplicar la condición del monto mínimo.
+### 3) Escribe una consulta que devuelva el apodo de cada usuario y la valoración promedio de sus comentarios, siempre que la valoración sea mayor a 3. Agrupar los resultados por id usuario.
 
 ```sql
-SELECT Clientes.nombre, Clientes.apellido, SUM(Productos.precio) AS monto_total
-FROM Clientes
-LEFT JOIN Pedidos ON Clientes.dni = Pedidos.dni
-LEFT JOIN Productos ON Pedidos.idProducto = Productos.idProducto
+SELECT E.nombre, E.apellido, COUNT(P.idProducto) AS total_productos
+FROM Empleador E
+LEFT JOIN Productos P ON E.cuil = P.cuil
+WHERE P.precio BETWEEN 100 AND 500
+GROUP BY E.cuil;
+
+```
+
+### 4) Escribe una consulta que muestre el nombre y apellido de cada cliente junto con el monto total de sus pedidos, solo si ese total es mayor a $500. Utiliza LEFT JOIN para unir Clientes y Pedidos, y agrupa los resultados por dni del cliente. Asegúrate de aplicar la condición del monto mínimo.
+
+```sql
+SELECT C.nombre AS nombre_categoria, COUNT(Pedidos_Productos.idProducto) AS total_vendidos
+FROM Categorias C
+INNER JOIN Productos P ON C.idCategoria = P.idCategoria
+INNER JOIN Pedidos_Productos PeP ON P.idProducto = PeP.idProducto
+GROUP BY C.idCategoria
+ORDER BY total_vendidos DESC;
+
+```
+
+### 5) Obtener el nombre del cliente, el total de productos diferentes que ha comprado, el valor promedio de los productos comprados, y la cantidad total de pedidos realizados por cada cliente. Incluir también a aquellos clientes que no hayan realizado pedidos. Mostrar solo los clientes que han comprado más de 2 productos diferentes y cuyo promedio de precio de los productos comprados sea superior a $50. Ordenar el resultado de mayor a menor en base al total de productos diferentes.
+
+
+```sql
+SELECT C.nombre AS nombre_cliente,
+   	C.apellido AS apellido_cliente,
+   	COUNT(DISTINCT PeP.idProducto) AS productos_diferentes,
+   	AVG(Pr.precio) AS promedio_precio,
+   	COUNT(P.idPedido) AS total_pedidos
+FROM Clientes C
+LEFT JOIN Pedidos P ON C.dni = P.dni
+LEFT JOIN Pedidos_Productos PeP ON P.idPedido = PeP.idPedido
+LEFT JOIN Productos Pr ON PeP.idProducto = Pr.idProducto
+WHERE Pr.precio IS NOT NULL
 GROUP BY Clientes.dni
-HAVING monto_total > 500;
+HAVING productos_diferentes > 2 AND promedio_precio > 50
+ORDER BY productos_diferentes DESC;
 
 ```
-
-## Consultas DML:
-
-### 1) Crear un nuevo país y dar de alta un usuario
