@@ -1,7 +1,170 @@
 # Vista Previa de la Base de Datos
 
 ## DER:
-![Diagrama ER de la Base de Datos](./DER.png)
+<div align="center">
+```mermaid
+erDiagram
+    Pais {
+        INT idPais
+        VARCHAR nombre
+    }
+
+    Ubicacion {
+        INT idUbicacion
+        VARCHAR direccion
+        VARCHAR ciudad
+        INT idPais
+    }
+
+    Garantia {
+        INT idGarantia
+        VARCHAR nombre
+        DATETIME caducidad
+    }
+
+    Empleador {
+        VARCHAR nombre
+        VARCHAR apellido
+        BIGINT cuil
+    }
+
+    Valoracion {
+        CHAR idValoracion
+        FLOAT valoracion
+    }
+
+    Empleados {
+        CHAR matricula
+        VARCHAR nombre
+        VARCHAR apellido
+        BIGINT cuil
+    }
+
+    Categorias {
+        INT idCategoria
+        VARCHAR nombre
+    }
+
+    Usuario {
+        BIGINT idUsuario
+        VARCHAR apodo
+        VARCHAR email
+        VARCHAR ubicacion
+        INT idPais
+    }
+
+    Comentario {
+        INT idComentario
+        BIGINT idUsuario
+        CHAR idValoracion
+        VARCHAR comentario
+    }
+
+    Clientes {
+        CHAR dni
+        VARCHAR nombre
+        VARCHAR apellido
+        BIGINT idUsuario
+    }
+
+    Contrato {
+        INT idContrato
+        CHAR matricula
+        DATE fechaInicio
+        DATE fechaFin
+        MEDIUMINT salario
+        BIGINT cuil
+    }
+
+    Productos {
+        INT idProducto
+        VARCHAR nombre
+        DECIMAL precio
+        INT stock
+        VARCHAR descripcion
+        BIGINT cuil
+        INT idGarantia
+        INT idCategoria
+    }
+
+    Inventario {
+        INT idProducto
+        INT idInventario
+        MEDIUMINT cantidad
+        DATE fechaIngreso
+    }
+
+    Pedidos {
+        INT idPedido
+        INT idProducto
+        CHAR dni
+        DATETIME fechaPedido
+        VARCHAR direccion
+    }
+
+    Pedidos_Productos {
+        INT idPedidosProductos
+        INT idPedido
+        INT idProducto
+        TINYINT cantidad
+    }
+
+    HistorialCompra {
+        INT idProducto
+        INT idCategoria
+        INT idPedido
+        INT idUbicacion
+        MEDIUMINT precioUnitario
+        DATE fecha
+    }
+
+    Comprobante {
+        INT numeroDeReferencia
+        INT idPedido
+        CHAR dni
+        DATE fecha
+        MEDIUMINT montoTotal
+    }
+
+    Envios {
+        CHAR matricula
+        DATETIME fechaEnvio
+        INT idProducto
+        INT idEnvio
+    }
+
+    Carrito {
+        INT idCarrito
+        DECIMAL precioTotal
+        INT idProducto
+        INT idPedido
+    }
+
+    Pais ||--o| Ubicacion: "Tiene"
+    Pais ||--o| Usuario: "Tiene"
+    Empleador ||--o| Productos: "Ofrece"
+    Empleador ||--o| Contrato: "Contrata"
+    Empleador ||--o| Envios: "Envía"
+    Garantia ||--o| Productos: "Cubre"
+    Valoracion ||--o| Comentario: "Es evaluado por"
+    Comentario ||--o| Usuario: "Es escrito por"
+    Comentario ||--o| Valoracion: "Tiene"
+    Clientes ||--o| Usuario: "Es un"
+    Productos ||--o| Pedidos: "Es parte de"
+    Productos ||--o| Inventario: "Está en"
+    Productos ||--o| Pedidos_Productos: "Está en"
+    Productos ||--o| HistorialCompra: "Aparece en"
+    Productos ||--o| Envios: "Es enviado"
+    Productos ||--o| Carrito: "Está en"
+    Pedidos ||--o| Clientes: "Es realizado por"
+    Pedidos ||--o| Comprobante: "Es registrado en"
+    Pedidos ||--o| HistorialCompra: "Está en"
+    Pedidos ||--o| Pedidos_Productos: "Contiene"
+    Pedidos_Productos ||--o| Productos: "Contiene"
+    HistorialCompra ||--o| Ubicacion: "En"
+    Carrito ||--o| Pedidos: "Está asociado con"
+    ```
+</div>
 
 ## Consultas SQL: 
 
