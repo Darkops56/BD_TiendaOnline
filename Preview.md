@@ -1,7 +1,7 @@
 # Vista Previa de la Base de Datos
 
 ## DER:
-<div align="center">
+
 ```mermaid
 erDiagram
     Pais {
@@ -163,8 +163,7 @@ erDiagram
     Pedidos_Productos ||--o| Productos: "Contiene"
     HistorialCompra ||--o| Ubicacion: "En"
     Carrito ||--o| Pedidos: "Está asociado con"
-    ```
-</div>
+```
 
 ## Consultas SQL: 
 
@@ -224,12 +223,3 @@ HAVING monto_total > 500;
 ## Consultas DML:
 
 ### 1) Crear un nuevo país y dar de alta un usuario
-
-```sql
--- Crear un nuevo país
-INSERT INTO Pais (idPais, nombre) VALUES (3, 'País Inventado');
-
--- Dar de alta un usuario afiliado a este país, con id 3, un email y ubicación especificada
-INSERT INTO Usuario (idUsuario, apodo, email, ubicacion, idPais) 
-VALUES (3, 'ApodoEjemplo', 'ejemplo@correo.com', 'Institución Escolar', 3);
-```
