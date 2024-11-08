@@ -4,14 +4,6 @@
 
 ```mermaid
 erDiagram
-    Contrato {
-        INT idContrato
-        CHAR(7) matricula
-        DATE fechaInicio
-        DATE fechaFin
-        MEDIUMINT salario
-        BIGINT cuil
-    }
 
     Envios {
         CHAR(7) matricula
@@ -140,27 +132,27 @@ erDiagram
         DATETIME caducidad
     }
 
-    Contrato ||--o{ Envios : ""
-    Contrato ||--|{ Empleados : ""
-    Envios ||--|| Ubicacion : ""
-    HistorialCompra }o--|| Pedidos : ""
+    Envios }|--|| Ubicacion : ""
+    Envios }|--|| Empleados: ""
+    HistorialCompra ||--o{ Pedidos : ""
     HistorialCompra }o--|| Ubicacion : ""
     Clientes }o--o| Usuario : ""
     Clientes ||--o{ Pedidos : ""
-    Pedidos }o--|| Productos : ""
+    Clientes ||--o{ Comprobante : ""
     Productos }o--o| Categorias : ""
     Productos ||--o| Garantia : ""
-    Pedidos ||--o{ Pedidos_Productos : ""
+    Productos ||--o{ Pedidos_Productos: ""
+    Pedidos_Productos }|--o| Pedidos : ""
     Pedidos ||--|| Comprobante : ""
     Usuario ||--o{ Comentario : ""
     Usuario }o--|| Pais : ""
     Comentario }o--|| Valoracion : ""
     Empleador ||--o{ Empleados : ""
-    Empleados ||--o{ Contrato : ""
+    Empleador ||--|{ Productos: ""
     Ubicacion }o--|| Pais : ""
     Productos ||--o{ Inventario : ""
-    Carrito ||--o| Productos : ""
-    Carrito ||--|| Pedidos : ""
+    Carrito ||--o{ Productos : ""
+    Carrito ||--|{ Pedidos : ""
 ```
 
 ## Consultas SQL: 

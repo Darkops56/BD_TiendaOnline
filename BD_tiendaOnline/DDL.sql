@@ -44,6 +44,7 @@ CREATE TABLE Empleados (
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
     cuil BIGINT UNSIGNED NOT NULL,
+    contrato varchar(250) NOT NULL,
     CONSTRAINT PK_Empleados PRIMARY KEY (matricula ASC),
     CONSTRAINT FK_Empleados_Empleador FOREIGN KEY (cuil) REFERENCES Empleador (cuil)
 );
@@ -83,17 +84,6 @@ CREATE TABLE Clientes (
     CONSTRAINT FK_ClientesUsuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario)
 );
 
-CREATE TABLE Contrato (
-    idContrato INT UNSIGNED NOT NULL,
-    matricula char(7),
-    fechaInicio DATE,
-    fechaFin DATE,
-    salario MEDIUMINT NOT NULL,
-    cuil BIGINT UNSIGNED NOT NULL,
-    CONSTRAINT PK_Contrato PRIMARY KEY (idContrato ASC),
-    CONSTRAINT FK_Contrato_Empleados FOREIGN KEY (matricula) REFERENCES Empleados (matricula),
-    CONSTRAINT FK_Contrato_Empleador FOREIGN KEY (cuil) REFERENCES Empleador (cuil)
-);
 
 CREATE TABLE Productos (
     idProducto INT UNSIGNED AUTO_INCREMENT,
