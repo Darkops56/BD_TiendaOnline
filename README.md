@@ -1,6 +1,15 @@
 # Base De Datos: Tienda Online.
 
+## Participantes
+
+### Paetz Rodolfo.
+### Alina Martinez.
+### Casimiro Enzo.
+### Zerpa Sebastian.
+
+
 ## DER:
+
 
 ```mermaid
 erDiagram
