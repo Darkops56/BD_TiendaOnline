@@ -1,26 +1,64 @@
+-- Active: 1731249913115@@127.0.0.1@3306@bd_tiendaonline
 INSERT INTO Pais (idPais, nombre)
 VALUES 
 (50, 'Chile'), (52, 'Uruguay'), (51, 'Brasil'), (53, 'Bolivia'), (54, 'Paraguay'), 
 (55, 'Colombia'), (56, 'Venezuela'), (57, 'Panamá'), (58, 'Costa Rica'), (59, 'Cuba'),
 (60, 'Honduras'), (61, 'El Salvador'), (62, 'Guatemala'), (63, 'Nicaragua'), (64, 'Puerto Rico'),
 (65, 'República Dominicana'), (66, 'Haití'), (67, 'Jamaica'), (68, 'Guyana'), (69, 'Surinam'),
-(70,'Perú'), (71,'México'), (72, 'Ecuador'), (73, 'Argentina');
+(70, 'Perú'), (71, 'México'), (72, 'Ecuador'), (73, 'Argentina');
 
-
-INSERT INTO Garantia (idGarantia, nombre, caducidad)
+INSERT INTO Clientes (dni, nombre, apellido)
 VALUES 
-(1162348664, 'Sony Warranty', '2026-01-01'), (1162348665, 'Samsung Protect', '2026-05-20'), 
-(1162348666, 'Apple Care+', '2027-09-30'), (1162348667, 'LG Extended', '2026-04-15'), 
-(1162348668, 'HP Warranty', '2025-12-31'), (1162348669, 'Dell Secure', '2026-03-14'), 
-(1162348670, 'Lenovo Care', '2026-06-25'), (1162348671, 'Acer Protect', '2027-01-11'), 
-(1162348672, 'Asus Extend', '2027-04-28'), (1162348673, 'MSI Secure', '2027-08-10'), 
-(1162348674, 'Canon Care', '2026-02-22'), (1162348675, 'Nikon Protect', '2027-05-19'), 
-(1162348676, 'Bose Sound', '2026-07-14'), (1162348677, 'JBL Guard', '2027-06-10'), 
-(1162348678, 'Philips Secure', '2026-09-01'), (1162348679, 'Panasonic Safe', '2027-03-09'), 
-(1162348680, 'Motorola Care', '2026-11-11'), (1162348681, 'Xiaomi Protect', '2027-10-12'), 
-(1162348682, 'Oppo Extend', '2028-01-19'), (1162348683, 'Huawei Warranty', '2027-12-04'),
-(1162348663, 'Express', '2027-07-21'), (1284751238, 'Express', '2026-06-30'),
-(1284751237,'cannon', '2028-06-14');
+(12345678, 'Carlos', 'López'),
+(87654321, 'Maria', 'Gonzalez'),
+(95912334, 'Brisa', 'Marcos'),
+(10123456, 'Dante', 'Herrera'),
+(10123457, 'Laura', 'Rey'),
+(10123458, 'Raúl', 'Gómez'),
+(10123459, 'Ana', 'Pérez'),
+(10123460, 'Sofía', 'Ramos'),
+(10123461, 'Carmen', 'Sosa'),
+(10123462, 'Jorge', 'Vera'),
+(10123463, 'Luis', 'Campos'),
+(10123464, 'Santiago', 'Martínez'),
+(10123465, 'Elena', 'Morales'),
+(10123466, 'Clara', 'Vargas'),
+(10123467, 'Gabriel', 'López'),
+(10123468, 'Sandra', 'Jiménez'),
+(10123469, 'Daniel', 'Torres'),
+(10123470, 'Martín', 'Salas'),
+(10123471, 'Alberto', 'Álvarez'),
+(10123472, 'Patricia', 'Fuentes'),
+(10123473, 'Miguel', 'Luna'),
+(10123474, 'Rosa', 'Castro'),
+(10123475, 'Lucía', 'Guerrero');
+
+INSERT INTO Garantia (idGarantia, nombre, caducidad, tipoGarantia, condiciones)
+VALUES 
+(1162348664, 'Sony Warranty', '2026-01-01', 'Extendida', 'Cubre daños accidentales por 3 años. No incluye caída o mal uso.'),
+(1162348665, 'Samsung Protect', '2026-05-20', 'Protección', 'Garantía de 2 años para daños por agua y caídas.'),
+(1162348666, 'Apple Care+', '2027-09-30', 'Seguridad', 'Cubre daños accidentales, incluyendo pantalla rota. Incluye soporte técnico prioritario.'),
+(1162348667, 'LG Extended', '2026-04-15', 'Extendida', 'Extiende la garantía de fábrica por 2 años adicionales. Solo cubre defectos de fabricación.'),
+(1162348668, 'HP Warranty', '2025-12-31', 'Garantía estándar', 'Cobertura de 1 año para defectos de fabricación. No cubre daños accidentales.'),
+(1162348669, 'Dell Secure', '2026-03-14', 'Seguridad', 'Incluye reparación gratuita en caso de mal funcionamiento del sistema. No cubre daños por virus.'),
+(1162348670, 'Lenovo Care', '2026-06-25', 'Protección', 'Garantía de 3 años contra fallos de hardware. No cubre daños por mal uso.'),
+(1162348671, 'Acer Protect', '2027-01-11', 'Protección', 'Cubre daños por sobrecalentamiento y fallos de hardware por 2 años.'),
+(1162348672, 'Asus Extend', '2027-04-28', 'Extendida', 'Extiende la cobertura de 1 año a 3 años. Cubre fallos del sistema.'),
+(1162348673, 'MSI Secure', '2027-08-10', 'Seguridad', 'Garantía contra mal funcionamiento del hardware durante 2 años.'),
+(1162348674, 'Canon Care', '2026-02-22', 'Garantía estándar', 'Cobertura limitada de 1 año. Cubre solo defectos de fábrica.'),
+(1162348675, 'Nikon Protect', '2027-05-19', 'Protección', 'Garantía de 2 años para cámaras y lentes. Cubre daños por caídas y humedad.'),
+(1162348676, 'Bose Sound', '2026-07-14', 'Extendida', 'Extiende la garantía por 2 años. Cubre fallos en la calidad de sonido y batería.'),
+(1162348677, 'JBL Guard', '2027-06-10', 'Seguridad', 'Cubre daños por caídas accidentales, incluida la reparación del altavoz.'),
+(1162348678, 'Philips Secure', '2026-09-01', 'Seguridad', 'Garantía de 2 años. Cubre defectos de fábrica y mal funcionamiento del producto.'),
+(1162348679, 'Panasonic Safe', '2027-03-09', 'Protección', 'Cubre daños de fábrica durante 2 años. No cubre daños por uso indebido.'),
+(1162348680, 'Motorola Care', '2026-11-11', 'Garantía estándar', 'Cobertura de 1 año. Incluye reparaciones por defectos de fabricación.'),
+(1162348681, 'Xiaomi Protect', '2027-10-12', 'Protección', 'Cubre daños por caídas y mal uso del dispositivo por 2 años.'),
+(1162348682, 'Oppo Extend', '2028-01-19', 'Extendida', 'Garantía extendida por 2 años. Cubre solo defectos de fábrica.'),
+(1162348683, 'Huawei Warranty', '2027-12-04', 'Garantía estándar', 'Cobertura básica de 1 año. No cubre daños accidentales.'),
+(1162348663, 'Express', '2027-07-21', 'Protección', 'Garantía por 2 años que cubre daños por mal uso y caídas accidentales.'),
+(1284751238, 'Express', '2026-06-30', 'Protección', 'Protección ante fallos de hardware por 2 años. No cubre daños por agua.'),
+(1284751237, 'Canon', '2028-06-14', 'Extendida', 'Extiende la garantía estándar por 3 años. Cubre problemas de fabricación y componentes defectuosos.');
+
 
 INSERT INTO Empleador (cuil, nombre, apellido)
 VALUES 
@@ -30,35 +68,34 @@ VALUES
 (123456798, 'Silvia', 'Paz'), (123456799, 'Joaquín', 'Bravo'), (123456800, 'Marta', 'Leiva'), 
 (123456801, 'Roberto', 'Mendoza'), (123456802, 'Lorena', 'Ibáñez'), (123456803, 'Daniel', 'Palacios'), 
 (123456804, 'Eva', 'Ortiz'), (123456805, 'Claudio', 'Vera'), (123456806, 'Noelia', 'Molina'), 
-(123456807, 'Rafael', 'Cabrera'), (123456808, 'Sandra', 'Ponce'), (35678945, 'Timmy', 'Turner'), (34853151, 'Ana', 'Martínez'),
-(34853777,'vegetta','777');
+(123456807, 'Rafael', 'Cabrera'), (123456808, 'Sandra', 'Ponce'), (35678945, 'Timmy', 'Turner'), 
+(34853151, 'Ana', 'Martínez'), (34853777, 'Vegetta', '777');
 
-INSERT INTO Empleados (matricula, nombre, apellido, cuil)
+INSERT INTO Empleados (matricula, nombre, apellido, fechaIngreso, salario, puesto, contrato, cuil)
 VALUES 
-('G4Y-B01', 'Juan', 'Pérez', 123456789),
-('G4Y-B02', 'María', 'López', 123456790),
-('G4Y-B03', 'Carlos', 'Sánchez', 123456791),
-('G4Y-B04', 'Laura', 'González', 123456792),
-('G4Y-B05', 'Pedro', 'Hernández', 123456793),
-('G4Y-B06', 'Ana', 'Martínez', 123456794),
-('G4Y-B07', 'Jorge', 'Díaz', 123456795),
-('G4Y-B08', 'Lucía', 'Vega', 123456796),
-('G4Y-B09', 'Raúl', 'Flores', 123456797),
-('G4Y-B10', 'Paula', 'Silva', 123456798),
-('G4Y-B11', 'Luis', 'Morales', 123456799),
-('G4Y-B12', 'Inés', 'Ramírez', 123456800),
-('G4Y-B13', 'Manuel', 'Figueroa', 123456801),
-('G4Y-B14', 'Beatriz', 'Medina', 123456802),
-('G4Y-B15', 'Diego', 'Ortega', 123456803),
-('G4Y-B16', 'Elena', 'Soto', 123456804),
-('G4Y-B17', 'Santiago', 'Nuñez', 123456805),
-('G4Y-B18', 'Valeria', 'Paz', 123456806),
-('G4Y-B19', 'Martín', 'Castro', 123456807),
-('G4Y-B20', 'Diana', 'Cordero', 123456808),
-('G4Y-A57', 'Lucía', 'Martínez', 35678945),
-('G4Y-A55', 'Lucas', 'Lisandro', 34853151),
-('G4Y-V77', 'Fabrizio', 'Cuello', 34853777);
-
+('G4Y-B01', 'Juan', 'Pérez', '2023-01-15', 3000, 'Desarrollador de Software', '2023-01-15', 123456789),
+('G4Y-B02', 'María', 'López', '2023-02-20', 1500, 'Asistente Administrativo', '2023-02-20', 123456790),
+('G4Y-B03', 'Carlos', 'Sánchez', '2022-06-30', 4500, 'Gerente de Marketing', '2022-06-30', 123456791),
+('G4Y-B04', 'Laura', 'González', '2024-03-01', 2800, 'Diseñadora Gráfica', '2024-03-01', 123456792),
+('G4Y-B05', 'Pedro', 'Hernández', '2023-07-10', 3500, 'Jefe de Ventas', '2023-07-10', 123456793),
+('G4Y-B06', 'Ana', 'Martínez', '2023-11-05', 2200, 'Recepcionista', '2023-11-05', 123456794),
+('G4Y-B07', 'Jorge', 'Díaz', '2023-09-12', 1800, 'Soporte Técnico', '2023-09-12', 123456795),
+('G4Y-B08', 'Lucía', 'Vega', '2023-10-25', 2700, 'Analista de Datos', '2023-10-25', 123456796),
+('G4Y-B09', 'Raúl', 'Flores', '2023-12-01', 3200, 'Contador', '2023-12-01', 123456797),
+('G4Y-B10', 'Paula', 'Silva', '2024-01-05', 3900, 'Gerente de Finanzas', '2024-01-05', 123456798),
+('G4Y-B11', 'Luis', 'Morales', '2023-04-15', 3300, 'Analista de Marketing', '2023-04-15', 123456799),
+('G4Y-B12', 'Inés', 'Ramírez', '2022-08-12', 2500, 'Asistente de Recursos Humanos', '2022-08-12', 123456800),
+('G4Y-B13', 'Manuel', 'Figueroa', '2023-06-05', 4000, 'Director de Proyectos', '2023-06-05', 123456801),
+('G4Y-B14', 'Beatriz', 'Medina', '2023-07-20', 2800, 'Coordinadora de Eventos', '2023-07-20', 123456802),
+('G4Y-B15', 'Diego', 'Ortega', '2023-09-25', 2200, 'Analista de Sistemas', '2023-09-25', 123456803),
+('G4Y-B16', 'Elena', 'Soto', '2023-10-05', 3100, 'Asesora Comercial', '2023-10-05', 123456804),
+('G4Y-B17', 'Santiago', 'Nuñez', '2023-08-30', 2000, 'Vendedor', '2023-08-30', 123456805),
+('G4Y-B18', 'Valeria', 'Paz', '2023-05-15', 2500, 'Diseñadora de Moda', '2023-05-15', 123456806),
+('G4Y-B19', 'Martín', 'Castro', '2023-04-22', 1800, 'Asistente de Ventas', '2023-04-22', 123456807),
+('G4Y-B20', 'Diana', 'Cordero', '2023-02-05', 3100, 'Coordinadora de Proyectos', '2023-02-05', 123456808),
+('G4Y-A57', 'Lucía', 'Martínez', '2024-01-10', 3300, 'Asistente Ejecutivo', '2024-01-10', 35678945),
+('G4Y-A55', 'Lucas', 'Lisandro', '2024-02-18', 3600, 'Líder de Equipo', '2024-02-18', 34853151),
+('G4Y-V77', 'Fabrizio', 'Cuello', '2023-11-22', 4000, 'Director de Tecnología', '2023-11-22', 34853777);
 
 INSERT INTO Valoracion (idValoracion, valoracion)
 VALUES 
@@ -76,42 +113,74 @@ VALUES
 (9028, 'Electrónica'), (9029, 'Perfumes'), (9030, 'Calzado'), (9031, 'Decoración'), (9032, 'Cuidado Personal'),
 (34, 'Electrónica Adicional'), (35, 'Electrodomésticos Adicionales'), (36, 'Mobiliarios');
 
-INSERT INTO Usuario (idUsuario, apodo, email, ubicacion, idPais)
-VALUES 
-(7001, 'DanteX', 'dantex@gmail.com', 'Buenos Aires', 54), (7002, 'Laure', 'laure@hotmail.com', 'Lima', 51), 
-(7003, 'Rocket', 'rocket@live.com', 'Bogotá', 60), (7004, 'SilverFox', 'silver.fox@yahoo.com', 'Caracas', 61),
-(7005, 'Flame', 'flame@gmail.com', 'Montevideo', 56), (7006, 'Sakura', 'sakura@outlook.com', 'San Juan', 63), 
-(7007, 'Panda', 'panda@hotmail.com', 'Santiago', 55), (7008, 'Hera', 'hera@gmail.com', 'Quito', 53),
-(7009, 'Fireball', 'fireball@gmail.com', 'La Paz', 58), (7010, 'Skye', 'skye@hotmail.com', 'Panamá City', 62), 
-(7011, 'Thor', 'thor@gmail.com', 'San Salvador', 66), (7012, 'Venom', 'venom@live.com', 'Asunción', 59), 
-(7013, 'Bubbly', 'bubbly@outlook.com', 'San José', 63), (7014, 'Nova', 'nova@gmail.com', 'Ciudad de México', 52), 
-(7015, 'Phoenix', 'phoenix@yahoo.com', 'San Juan', 64), (7016, 'Jet', 'jet@hotmail.com', 'Guatemala', 67), 
-(7017, 'Atlas', 'atlas@gmail.com', 'Tegucigalpa', 65), (7018, 'Ares', 'ares@yahoo.com', 'La Habana', 64), 
-(7019, 'Echo', 'echo@gmail.com', 'Managua', 68), (7020, 'Tempest', 'tempest@live.com', 'Puerto Príncipe', 71),
-(5456 ,'Xx_NoobMaster69_xX' , 'tugatitauwu69@hotmail.com', 'Perú' ,51), (8371 ,'tuleoncita' , 'leonaempoderada.mor86@hotmail.com', 'Islas del Kongo' ,54),
-(2008,'gatogayowo777','tulobita777@gmail.com','Argentina',54);
 
-INSERT INTO Productos (idProducto, nombre, precio, stock, descripcion, cuil, idGarantia, idCategoria)
+INSERT INTO Usuario (idUsuario, apodo, email, ubicacion, idPais, dni)
 VALUES 
-(6576, 'Laptop MX100', 320, 25, 'Laptop de 14 pulgadas con 8GB RAM', 123456789, 1162348664, 9013),
-(6577, 'Monitor HD', 120, 50, 'Monitor de 24 pulgadas Full HD', 123456790, 1162348665, 9014),
-(6578, 'Cámara Pro', 450, 15, 'Cámara de alta resolución con 4K', 123456791, 1162348666, 9015),
-(6579, 'Auriculares WZ', 80, 100, 'Auriculares inalámbricos con sonido envolvente', 123456792, 1162348667, 9016),
-(6580, 'Teclado RGB', 60, 70, 'Teclado mecánico con iluminación RGB', 123456793, 1162348668, 9017),
-(6581, 'Impresora Láser', 200, 20, 'Impresora láser monocromática', 123456794, 1162348669, 9018),
-(6582, 'Smart TV 50"', 400, 10, 'Televisor 4K de 50 pulgadas', 123456795, 1162348670, 9019),
-(6583, 'Aspiradora Smart', 150, 30, 'Aspiradora inteligente con Wi-Fi', 123456796, 1162348671, 9020),
-(6584, 'Freidora de Aire', 110, 60, 'Freidora sin aceite de 5 litros', 123456797, 1162348672, 9021),
-(6585, 'Sofá Modular', 300, 5, 'Sofá modular con tres piezas', 123456798, 1162348673, 9022),
-(6586, 'Auto Modelo X', 18000, 3, 'Auto compacto de 4 puertas', 123456799, 1162348674, 9023),
-(6587, 'Chaqueta Invierno', 50, 40, 'Chaqueta para invierno con aislamiento', 123456800, 1162348675, 9024),
-(6588, 'Dron Z-Pro', 250, 10, 'Dron con cámara 1080p y estabilizador', 123456801, 1162348676, 9027),
-(6589, 'Smartphone Galaxy', 300, 35, 'Smartphone con 64GB de memoria y 6.4" de pantalla', 123456802, 1162348664, 9028),
-(6590, 'Perfume Classic', 40, 100, 'Perfume de aroma clásico', 123456803, 1162348678, 9029),
-(4534, 'Smartphone XYZ', 299.99, 50, 'Smartphone de última generación con pantalla de 6.5 pulgadas.', 35678945, 1162348663, 34),
-(4012, 'Aire Acondicionado Split Inverter Midea Smart', 2999.99, 34, 'Un aire con la capacidad de mantener fresco cualquier ambiente.', 34853151, 1284751238, 35),
-(2077, 'Cama', 3.99, 669, 'Dormirás muy bien en esta cama probablemente mucho más cara que la tuya, mucho más cómoda que la tuya y mucho más bonita que la tuya', 34853777, 1284751237, 36);
+(7001, 'DanteX', 'dantex@gmail.com', 'Buenos Aires', 54, 10123456),
+(7002, 'Laure', 'laure@hotmail.com', 'Lima', 51, 10123457),
+(7003, 'Rocket', 'rocket@live.com', 'Bogotá', 55, 95912334),
+(7004, 'SilverFox', 'silver.fox@yahoo.com', 'Caracas', 56, 87654321),
+(7005, 'Flame', 'flame@gmail.com', 'Montevideo', 52, 12345678),
+(7006, 'Sakura', 'sakura@outlook.com', 'San Juan', 63, 10123458),
+(7007, 'Panda', 'panda@hotmail.com', 'Santiago', 50, 10123459),
+(7008, 'Hera', 'hera@gmail.com', 'Quito', 72, 10123460),
+(7009, 'Fireball', 'fireball@gmail.com', 'La Paz', 53, 10123461),
+(7010, 'Skye', 'skye@hotmail.com', 'Panamá City', 57, 10123462),
+(7011, 'Thor', 'thor@gmail.com', 'San Salvador', 60, 10123463),
+(7012, 'Venom', 'venom@live.com', 'Asunción', 54, 10123464),
+(7013, 'Bubbly', 'bubbly@outlook.com', 'San José', 58, 10123465),
+(7014, 'Nova', 'nova@gmail.com', 'Ciudad de México', 71, 10123466),
+(7015, 'Phoenix', 'phoenix@yahoo.com', 'San Juan', 63, 10123467),
+(7016, 'Jet', 'jet@hotmail.com', 'Guatemala', 62, 10123468),
+(7017, 'Atlas', 'atlas@gmail.com', 'Tegucigalpa', 60, 10123469),
+(7018, 'Ares', 'ares@yahoo.com', 'La Habana', 59, 10123470),
+(7019, 'Echo', 'echo@gmail.com', 'Managua', 62, 10123471),
+(7020, 'Tempest', 'tempest@live.com', 'Puerto Príncipe', 66, 10123472),
+(5456, 'Xx_NoobMaster69_xX', 'tugatitauwu69@hotmail.com', 'Perú', 51, 10123472),
+(8371, 'tuleoncita', 'leonaempoderada.mor86@hotmail.com', 'Islas del Kongo', 54, 10123464),
+(2008, 'gatogayowo777', 'tulobita777@gmail.com', 'Argentina', 54, 12345678);
 
+INSERT INTO Inventario (idInventario, cantidad, fechaIngreso)
+VALUES 
+(10001, 100, '2023-01-15'), 
+(10002, 80, '2023-02-10'), 
+(10003, 120, '2023-03-05'), 
+(10004, 150, '2023-04-12'), 
+(10005, 200, '2023-05-09'), 
+(10006, 50, '2023-06-01'), 
+(10007, 60, '2023-07-14'), 
+(10008, 70, '2023-08-20'),
+(10009, 90, '2023-09-25'), 
+(10010, 100, '2023-10-03'), 
+(10011, 75, '2023-11-18'), 
+(10012, 65, '2023-12-24'), 
+(10013, 130, '2024-01-30'), 
+(10014, 140, '2024-02-27'), 
+(10015, 110, '2024-03-13'), 
+(10016, 85, '2024-04-16'), 
+(10017, 105, '2024-05-19'), 
+(10018, 125, '2024-06-22');
+
+INSERT INTO Productos (idProducto, nombre, precio, stock, descripcion, cuil, idGarantia, idCategoria, idInventario)
+VALUES 
+(6576, 'Laptop MX100', 320, 100, 'Laptop de 14 pulgadas con 8GB RAM', 123456789, 1162348664, 9013, 6576),
+(6577, 'Monitor HD', 120, 80, 'Monitor de 24 pulgadas Full HD', 123456790, 1162348665, 9014, 6577),
+(6578, 'Cámara Pro', 450, 120, 'Cámara de alta resolución con 4K', 123456791, 1162348666, 9015, 6578),
+(6579, 'Auriculares WZ', 80, 150, 'Auriculares inalámbricos con sonido envolvente', 123456792, 1162348667, 9016, 6579),
+(6580, 'Teclado RGB', 60, 200, 'Teclado mecánico con iluminación RGB', 123456793, 1162348668, 9017, 6580),
+(6581, 'Impresora Láser', 200, 50, 'Impresora láser monocromática', 123456794, 1162348669, 9018, 6581),
+(6582, 'Smart TV 50"', 400, 60, 'Televisor 4K de 50 pulgadas', 123456795, 1162348670, 9019, 6582),
+(6583, 'Aspiradora Smart', 150, 70, 'Aspiradora inteligente con Wi-Fi', 123456796, 1162348671, 9020, 6583),
+(6584, 'Freidora de Aire', 110, 90, 'Freidora sin aceite de 5 litros', 123456797, 1162348672, 9021, 6584),
+(6585, 'Sofá Modular', 300, 100, 'Sofá modular con tres piezas', 123456798, 1162348673, 9022, 6585),
+(6586, 'Auto Modelo X', 18000, 75, 'Auto compacto de 4 puertas', 123456799, 1162348674, 9023, 6586),
+(6587, 'Chaqueta Invierno', 50, 65, 'Chaqueta para invierno con aislamiento', 123456800, 1162348675, 9024, 6587),
+(6588, 'Dron Z-Pro', 250, 130, 'Dron con cámara 1080p y estabilizador', 123456801, 1162348676, 9027, 6588),
+(6589, 'Smartphone Galaxy', 300, 140, 'Smartphone con 64GB de memoria y 6.4" de pantalla', 123456802, 1162348664, 9028, 6589),
+(6590, 'Perfume Classic', 40, 100, 'Perfume de aroma clásico', 123456803, 1162348678, 9029, 6590),
+(4534, 'Smartphone XYZ', 299.99, 85, 'Smartphone de última generación con pantalla de 6.5 pulgadas.', 35678945, 1162348663, 34, 4534),
+(4012, 'Aire Acondicionado Split Inverter Midea Smart', 2999.99, 105, 'Un aire con la capacidad de mantener fresco cualquier ambiente.', 34853151, 1284751238, 35, 4012),
+(2077, 'Cama', 3.99, 125, 'Dormirás muy bien en esta cama probablemente mucho más cara que la tuya, mucho más cómoda que la tuya y mucho más bonita que la tuya', 34853777, 1284751237, 36, 2077);
 
 INSERT INTO Comentario (idComentario, idUsuario, idValoracion, comentario) 
 VALUES 
@@ -139,51 +208,28 @@ VALUES
 (3020, 2008, 'VAL-2036', 'Esta cama es como la que le hicieron al Coco Basile, dura y fría.');
 
 
-INSERT INTO Ubicacion (idUbicacion, direccion, ciudad, idPais)
+INSERT INTO Ubicacion (idUbicacion, direccion, ciudad, provincia, codigoPostal, idPais)
 VALUES 
-(201, 'Avenida Siempre Viva 742', 'Springfield', 54), 
-(202, 'Calle Falsa 123', 'Bogotá', 60), 
-(203, 'Ruta 66', 'Lima', 51), 
-(204, 'Diagonal 45', 'Caracas', 61), 
-(205, 'Avenida del Sol', 'Santiago', 55), 
-(206, 'Calle 50', 'Panamá', 62), 
-(207, 'Avenida Libertador', 'Quito', 53), 
-(208, 'Calle Los Olivos', 'San Juan', 64), 
-(209, 'Calle Corrientes', 'Buenos Aires', 54), 
-(210, 'Avenida Independencia', 'San Salvador', 66), 
-(211, 'Calle Palma', 'Asunción', 59), 
-(212, 'Avenida Insurgentes', 'Ciudad de México', 52), 
-(213, 'Calle San Martín', 'Montevideo', 56), 
-(214, 'Avenida de la Marina', 'Lima', 51), 
-(215, 'Calle Real', 'San José', 63), 
-(216, 'Avenida Brasil', 'La Paz', 58), 
-(217, 'Calle 21', 'La Habana', 64), 
-(218, 'Avenida Duarte', 'Santo Domingo', 70), 
-(219, 'Boulevard Centro', 'Tegucigalpa', 65), 
-(220, 'Avenida de las Américas', 'San Juan', 63);
-
-INSERT INTO Contrato (idContrato, matricula, fechaInicio, fechaFin, salario, cuil)
-VALUES 
-(201, 'G4Y-B01', '2023-01-01', '2024-01-01', 50000, 123456789), 
-(202, 'G4Y-B02', '2023-02-01', '2024-02-01', 48000, 123456790), 
-(203, 'G4Y-B03', '2023-03-01', '2024-03-01', 52000, 123456791), 
-(204, 'G4Y-B04', '2023-04-01', '2024-04-01', 49000, 123456792), 
-(205, 'G4Y-B05', '2023-05-01', '2024-05-01', 51000, 123456793), 
-(206, 'G4Y-B06', '2023-06-01', '2024-06-01', 47000, 123456794), 
-(207, 'G4Y-B07', '2023-07-01', '2024-07-01', 53000, 123456795), 
-(208, 'G4Y-B08', '2023-08-01', '2024-08-01', 55000, 123456796), 
-(209, 'G4Y-B09', '2023-09-01', '2024-09-01', 46000, 123456797), 
-(210, 'G4Y-B10', '2023-10-01', '2024-10-01', 48000, 123456798), 
-(211, 'G4Y-B11', '2023-11-01', '2024-11-01', 54000, 123456799), 
-(212, 'G4Y-B12', '2023-12-01', '2024-12-01', 53000, 123456800), 
-(213, 'G4Y-B13', '2024-01-01', '2025-01-01', 51000, 123456801), 
-(214, 'G4Y-B14', '2024-02-01', '2025-02-01', 50000, 123456802), 
-(215, 'G4Y-B15', '2024-03-01', '2025-03-01', 49000, 123456803), 
-(216, 'G4Y-B16', '2024-04-01', '2025-04-01', 56000, 123456804), 
-(217, 'G4Y-B17', '2024-05-01', '2025-05-01', 45000, 123456805), 
-(218, 'G4Y-B18', '2024-06-01', '2025-06-01', 60000, 123456806), 
-(219, 'G4Y-B19', '2024-07-01', '2025-07-01', 52000, 123456807), 
-(220, 'G4Y-B20', '2024-08-01', '2025-08-01', 58000, 123456808);
+(201, 'Avenida Siempre Viva 742', 'Springfield', 54, '12345', 54), 
+(202, 'Calle Falsa 123', 'Bogotá', 60, '67890', 60), 
+(203, 'Ruta 66', 'Lima', 51, '11223', 51), 
+(204, 'Diagonal 45', 'Caracas', 61, '44556', 61), 
+(205, 'Avenida del Sol', 'Santiago', 55, '78901', 55), 
+(206, 'Calle 50', 'Panamá', 62, '23456', 62), 
+(207, 'Avenida Libertador', 'Quito', 53, '34567', 53),
+(208, 'Calle Los Olivos', 'San Juan', 64, '45678', 64), 
+(209, 'Calle Corrientes', 'Buenos Aires', 54, '56789', 73), 
+(210, 'Avenida Independencia', 'San Salvador', 66, '67890', 66), 
+(211, 'Calle Palma', 'Asunción', 59, '78901', 59), 
+(212, 'Avenida Insurgentes', 'Ciudad de México', 52, '89012', 71), 
+(213, 'Calle San Martín', 'Montevideo', 56, '90123', 72), 
+(214, 'Avenida de la Marina', 'Lima', 51, '11223', 51), 
+(215, 'Calle Real', 'San José', 63, '12334', 58), 
+(216, 'Avenida Brasil', 'La Paz', 58, '98765', 57), 
+(217, 'Calle 21', 'La Habana', 64, '12345', 59), 
+(218, 'Avenida Duarte', 'Santo Domingo', 70, '23456', 65), 
+(219, 'Boulevard Centro', 'Tegucigalpa', 65, '34567', 60), 
+(220, 'Avenida de las Américas', 'San Juan', 63, '45678', 64);
 
 INSERT INTO Envios (matricula, fechaEnvio, idProducto) VALUES
 ('G4Y-B01', '2024-03-20 10:30:00', 6576), 
@@ -197,69 +243,46 @@ INSERT INTO Envios (matricula, fechaEnvio, idProducto) VALUES
 ('G4Y-B09', '2024-03-28 13:50:00', 6584), 
 ('G4Y-B10', '2024-03-29 15:00:00', 6585);
 
-
-INSERT INTO Inventario (idInventario, idProducto, cantidad, fechaIngreso)
+INSERT INTO Pedidos (idPedido, idProducto, idUsuario, estado, fechaPedido, direccion, formaPago) 
 VALUES 
-(30001, 6576, 100, '2023-01-15'), 
-(30002, 6577, 80, '2023-02-10'), 
-(30003, 6578, 120, '2023-03-05'), 
-(30004, 6579, 150, '2023-04-12'), 
-(30005, 6580, 200, '2023-05-09'), 
-(30006, 6581, 50, '2023-06-01'), 
-(30007, 6582, 60, '2023-07-14'), 
-(30008, 6583, 70, '2023-08-20'), 
-(30009, 6584, 90, '2023-09-25'), 
-(30010, 6585, 100, '2023-10-03'), 
-(30011, 6586, 75, '2023-11-18'), 
-(30012, 6587, 65, '2023-12-24'), 
-(30013, 6588, 130, '2024-01-30'), 
-(30014, 6589, 140, '2024-02-27'), 
-(30015, 6590, 110, '2024-03-13'), 
-(30016, 4534, 85, '2024-04-16'), 
-(30017, 4012, 105, '2024-05-19'), 
-(30018, 2077, 125, '2024-06-22');
+(1, 6576, 7016, 'Pendiente', '2024-03-10 15:30:00', 'Calle 123, Ciudad A', 'Tarjeta'),
+(2, 6577, 8371, 'Pendiente', '2024-03-11 16:00:00', 'Avenida 456, Ciudad B', 'Efectivo'),
+(3, 6578, 2008, 'Pendiente', '2024-03-12 14:15:00', 'Boulevard 789, Ciudad C', 'Tarjeta'),
+(4, 6579, 7017, 'Pendiente', '2024-03-13 17:30:00', 'Calle 101, Ciudad D', 'Transferencia'),
+(5, 6580, 7015, 'Pendiente', '2024-03-14 13:45:00', 'Avenida 202, Ciudad E', 'Tarjeta'),
+(6, 6581, 7019, 'Pendiente', '2024-03-15 10:00:00', 'Pasaje 303, Ciudad F', 'Efectivo'),
+(7, 6582, 7011, 'Pendiente', '2024-03-16 11:20:00', 'Camino 404, Ciudad G', 'Tarjeta'),
+(8, 6583, 7020, 'Pendiente', '2024-03-17 15:50:00', 'Callejón 505, Ciudad H', 'Transferencia'),
+(9, 6584, 7009, 'Pendiente', '2024-03-18 16:35:00', 'Paseo 606, Ciudad I', 'Efectivo'),
+(10, 6585, 7005, 'Pendiente', '2024-03-19 12:00:00', 'Ruta 707, Ciudad J', 'Tarjeta');
 
 
-INSERT INTO Pedidos (idPedido, idProducto, dni, fechaPedido, direccion) VALUES
-(1, 6576, 12345678, '2024-03-10 15:30:00', 'Calle 123, Ciudad A'),
-(2, 6577, 87654321, '2024-03-11 16:00:00', 'Avenida 456, Ciudad B'),
-(3, 6578, 95912334, '2024-03-12 14:15:00', 'Boulevard 789, Ciudad C'),
-(4, 6579, 10123456, '2024-03-13 17:30:00', 'Calle 101, Ciudad D'),
-(5, 6580, 10123457, '2024-03-14 13:45:00', 'Avenida 202, Ciudad E'),
-(6, 6581, 10123458, '2024-03-15 10:00:00', 'Pasaje 303, Ciudad F'),
-(7, 6582, 10123459, '2024-03-16 11:20:00', 'Camino 404, Ciudad G'),
-(8, 6583, 10123460, '2024-03-17 15:50:00', 'Callejón 505, Ciudad H'),
-(9, 6584, 10123461, '2024-03-18 16:35:00', 'Paseo 606, Ciudad I'),
-(10, 6585, 10123462, '2024-03-19 12:00:00', 'Ruta 707, Ciudad J');
-
-
-
-INSERT INTO HistorialCompra (idProducto, idCategoria, idPedido, idUbicacion, precioUnitario, fecha) VALUES
-(6576, 9013, 1, 201, 320, '2024-03-10'),
-(6577, 9014, 2, 202, 120, '2024-03-11'), 
-(6578, 9015, 3, 203, 450, '2024-03-12'), 
-(6579, 9016, 4, 204, 80, '2024-03-13'),  
-(6580, 9017, 5, 205, 60, '2024-03-14'),  
-(6581, 9018, 6, 206, 200, '2024-03-15'), 
-(6582, 9019, 7, 207, 400, '2024-03-16'), 
-(6583, 9020, 8, 208, 150, '2024-03-17'),
-(6584, 9021, 9, 209, 110, '2024-03-18'), 
-(6585, 9022, 10, 210, 300, '2024-03-19'); 
-
-
- 
-INSERT INTO Comprobante (numeroDeReferencia, idPedido, dni, fecha, montoTotal)
+INSERT INTO HistorialCompra (idProducto, idCategoria, idPedido, idUbicacion, idUsuario, precioUnitario, fecha) 
 VALUES 
-(20241234, 1, 12345678, '2012-05-10', 519.40),  
-(20256232, 2, 87654321, '2010-04-17', 1823.20), 
-(20256399, 3, 95912334, '2015-12-21', 4123.90), 
-(40001123, 4, 10123456, '2023-01-01', 600.50),  
-(40005123, 5, 10123457, '2023-05-05', 590.00),  
-(40007556, 6, 10123458, '2023-07-08', 300.00),  
-(40009665, 7, 10123459, '2023-09-14', 410.20),  
-(40011456, 8, 10123460, '2023-11-20', 330.90),  
-(40013326, 9, 10123461, '2024-01-15', 720.99),  
-(40015754, 10, 10123462, '2024-03-25', 480.60); 
+(6576, 9013, 1, 201, 2008, 320, '2024-03-10'),
+(6577, 9014, 2, 202, 5456, 120, '2024-03-11'), 
+(6578, 9015, 3, 203, 8371, 450, '2024-03-12'), 
+(6579, 9016, 4, 204, 7012, 80, '2024-03-13'), 
+(6580, 9017, 5, 205, 7017, 60, '2024-03-14'), 
+(6581, 9018, 6, 206, 7014, 200, '2024-03-15'), 
+(6582, 9019, 7, 207, 7011, 400, '2024-03-16'), 
+(6583, 9020, 8, 208, 7006, 150, '2024-03-17'), 
+(6584, 9021, 9, 209, 7001, 110, '2024-03-18'), 
+(6585, 9022, 10, 210, 7020, 300, '2024-03-19'); 
+
+INSERT INTO Comprobante (numeroDeReferencia, idUsuario, formaPago, estadoPago, idPedido, fecha, montoTotal) 
+VALUES 
+(20241234, 2008, 'Tarjeta', 'Pendiente', 1, '2024-03-10', 519.40),
+(20256232, 5456, 'Efectivo', 'Pendiente', 2, '2024-03-11', 1823.20),
+(20256399, 7020, 'Tarjeta', 'Pendiente', 3, '2024-03-12', 4123.90),
+(40001123, 7005, 'Transferencia', 'Pendiente', 4, '2024-03-13', 600.50),
+(40005123, 7019, 'Tarjeta', 'Pendiente', 5, '2024-03-14', 590.00),
+(40007556, 7012, 'Efectivo', 'Pendiente', 6, '2024-03-15', 300.00),
+(40009665, 7004, 'Tarjeta', 'Pendiente', 7, '2024-03-16', 410.20),
+(40011456, 7015, 'Transferencia', 'Pendiente', 8, '2024-03-17', 330.90),
+(40013326, 7017, 'Efectivo', 'Pendiente', 9, '2024-03-18', 720.99),
+(40015754, 7009, 'Tarjeta', 'Pendiente', 10, '2024-03-19', 480.60);
+
 
 INSERT INTO Carrito (idCarrito, precioTotal, idProducto, idPedido) VALUES
 (1, 320, 6576, 1), 
@@ -273,47 +296,20 @@ INSERT INTO Carrito (idCarrito, precioTotal, idProducto, idPedido) VALUES
 (9, 110, 6584, 9), 
 (10, 300, 6585, 10); 
 
-INSERT INTO Clientes (dni, nombre, apellido, idUsuario)
+INSERT INTO Pedidos_Productos (idPedido, idProducto, cantidad)
 VALUES 
-(12345678, 'Carlos', 'López', 5456),
-(87654321, 'Maria', 'Gonzalez', 8371),
-(95912334, 'Brisa', 'Marcos', 2008),
-(10123456, 'Dante', 'X', 7001),
-(10123457, 'Laura', 'Rey', 7002),
-(10123458, 'Raúl', 'Gómez', 7003),
-(10123459, 'Ana', 'Pérez', 7004),
-(10123460, 'Sofía', 'Ramos', 7005),
-(10123461, 'Carmen', 'Sosa', 7006),
-(10123462, 'Jorge', 'Vera', 7007),
-(10123463, 'Luis', 'Campos', 7008),
-(10123464, 'Santiago', 'Martínez', 7009),
-(10123465, 'Elena', 'Morales', 7010),
-(10123466, 'Clara', 'Vargas', 7011),
-(10123467, 'Gabriel', 'López', 7012),
-(10123468, 'Sandra', 'Jiménez', 7013),
-(10123469, 'Daniel', 'Torres', 7014),
-(10123470, 'Martín', 'Salas', 7015),
-(10123471, 'Alberto', 'Álvarez', 7016),
-(10123472, 'Patricia', 'Fuentes', 7017),
-(10123473, 'Miguel', 'Luna', 7018),
-(10123474, 'Rosa', 'Castro', 7019),
-(10123475, 'Lucía', 'Guerrero', 7020);
-
-
-INSERT INTO Pedidos_Productos (idPedidosProductos, idPedido, idProducto, cantidad)
-VALUES 
-(1, 1, 6576, 2), 
-(2, 1, 6579, 1), 
-(3, 2, 6577, 1), 
-(4, 5, 6580, 1), 
-(5, 10, 6585, 1), 
-(6, 3, 6587, 2), 
-(7, 10, 6586, 1), 
-(8, 8, 6583, 1), 
-(9, 2, 6577, 4), 
-(10, 9, 6584, 2), 
-(11, 7, 6582, 1), 
-(12, 3, 6578, 1), 
-(13, 4, 6579, 1), 
-(14, 6, 6588, 1), 
-(15, 10, 6590, 3);
+(1, 6576, 2), 
+(1, 6579, 1), 
+(2, 6577, 1), 
+(5, 6580, 1), 
+(10, 6585, 1), 
+(3, 6587, 2), 
+(10, 6586, 1), 
+(8, 6583, 1), 
+(9, 6577, 4), 
+(9, 6584, 2), 
+(7, 6582, 1), 
+(3, 6578, 1), 
+(4, 6579, 1), 
+(6, 6588, 1), 
+(10, 6590, 3);

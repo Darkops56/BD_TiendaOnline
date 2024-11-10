@@ -12,8 +12,10 @@ CREATE TABLE Pais (
 
 CREATE TABLE Ubicacion (
     idUbicacion INT UNSIGNED NOT NULL,
-    direccion VARCHAR(40),
-    ciudad varchar(20),
+    direccion VARCHAR(40) NOT NULL,
+    ciudad varchar(20) NOT NULL,
+    provincia varchar (255) NOT NULL,
+    codigoPostal VARCHAR(15) NOT NULL,
     idPais INT UNSIGNED NOT NULL,
     CONSTRAINT PK_Ubicacion PRIMARY KEY (idUbicacion),
     CONSTRAINT FK_UbicacionPais FOREIGN KEY (idPais) REFERENCES Pais (idPais)
@@ -22,7 +24,9 @@ CREATE TABLE Ubicacion (
 CREATE TABLE Garantia (
     idGarantia INT UNSIGNED AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
+    tipoGarantia VARCHAR(255) NOT NULL,
     caducidad DATETIME NOT NULL,
+    condiciones TEXT NOT NULL,
     CONSTRAINT PK_idGarantia PRIMARY KEY (idGarantia ASC)
 );
 
@@ -43,8 +47,11 @@ CREATE TABLE Empleados (
     matricula char(7),
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
+    puesto VARCHAR(100) NOT NULL,
+    fechaIngreso DATE NOT NULL,
+    salario INT UNSIGNED NOT NULL,
     cuil BIGINT UNSIGNED NOT NULL,
-    contrato varchar(250) NOT NULL,
+    contrato DATE NOT NULL,
     CONSTRAINT PK_Empleados PRIMARY KEY (matricula ASC),
     CONSTRAINT FK_Empleados_Empleador FOREIGN KEY (cuil) REFERENCES Empleador (cuil)
 );
@@ -54,14 +61,21 @@ CREATE TABLE Categorias (
     nombre VARCHAR(50) NOT NULL,
     CONSTRAINT PK_Categorias PRIMARY KEY (idCategoria)
 );
-
+CREATE TABLE Clientes (
+    dni CHAR(8),
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    CONSTRAINT PK_Clientes PRIMARY KEY (dni ASC)
+);
 CREATE TABLE Usuario (
-    idUsuario BIGINT UNSIGNED NOT NULL,
+    idUsuario BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     apodo VARCHAR(20) NOT NULL,
     email VARCHAR(40) NOT NULL,
     ubicacion VARCHAR(100) NOT NULL,
     idPais INT UNSIGNED NOT NULL,
+    dni CHAR(8) NOT NULL,
     CONSTRAINT PK_Usuario PRIMARY KEY (idUsuario ASC),
+    CONSTRAINT FK_UsuarioClientes FOREIGN KEY (dni) REFERENCES Clientes(dni),
     CONSTRAINT FK_UsuarioPais FOREIGN KEY (idPais) REFERENCES Pais (idPais)
 );
 
@@ -75,15 +89,12 @@ CREATE TABLE Comentario (
     CONSTRAINT FK_ComentarioValoracion FOREIGN KEY (idValoracion) REFERENCES Valoracion (idValoracion)
 );
 
-CREATE TABLE Clientes (
-    dni CHAR(8),
-    nombre VARCHAR(50) NOT NULL,
-    apellido VARCHAR(50) NOT NULL,
-    idUsuario BIGINT UNSIGNED NOT NULL,
-    CONSTRAINT PK_Clientes PRIMARY KEY (dni ASC),
-    CONSTRAINT FK_ClientesUsuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario)
+CREATE TABLE Inventario (
+    idInventario INT UNSIGNED NOT NULL,
+    cantidad MEDIUMINT UNSIGNED NOT NULL,
+    fechaIngreso DATE NOT NULL,
+    CONSTRAINT PK_Inventario PRIMARY KEY (idInventario ASC)
 );
-
 
 CREATE TABLE Productos (
     idProducto INT UNSIGNED AUTO_INCREMENT,
@@ -94,46 +105,39 @@ CREATE TABLE Productos (
     cuil BIGINT UNSIGNED,
     idGarantia INT UNSIGNED,
     idCategoria INT UNSIGNED,
+    idInventario INT UNSIGNED NOT NULL,
     CONSTRAINT PK_Productos PRIMARY KEY (idProducto ASC),
+    CONSTRAINT FK_Productos_Inventario FOREIGN KEY (idInventario) REFERENCES Inventario (idInventario),
     CONSTRAINT FK_Productos_Categorias FOREIGN KEY (idCategoria) REFERENCES Categorias (idCategoria),
     CONSTRAINT FK_Productos_Empleador FOREIGN KEY (cuil) REFERENCES Empleador (cuil),
     CONSTRAINT FK_Productos_Garantia FOREIGN KEY (idGarantia) REFERENCES Garantia (idGarantia)
 );
-
-CREATE TABLE Inventario (
-    idProducto INT UNSIGNED NOT NULL,
-    idInventario INT UNSIGNED NOT NULL,
-    cantidad MEDIUMINT UNSIGNED NOT NULL,
-    fechaIngreso DATE NOT NULL,
-    CONSTRAINT PK_Inventario PRIMARY KEY (idInventario ASC),
-    CONSTRAINT FK_Inventario_Producto FOREIGN KEY (idProducto) REFERENCES Productos (idProducto)
-);
-
 CREATE TABLE Pedidos (
     idPedido INT UNSIGNED AUTO_INCREMENT,
     idProducto INT UNSIGNED NOT NULL,
-    dni CHAR(8) NOT NULL,
+    idUsuario BIGINT UNSIGNED NOT NULL,
+    estado varchar(50) NOT NULL,
     fechaPedido DATETIME NOT NULL,
     direccion VARCHAR(100) NOT NULL,
+    formaPago VARCHAR(50) NOT NULL,
     CONSTRAINT PK_Pedidos PRIMARY KEY (idPedido ASC),
     CONSTRAINT FK_Pedidos_Productos FOREIGN KEY (idProducto) REFERENCES Productos (idProducto),
-    CONSTRAINT FK_Pedidos_Clientes FOREIGN KEY (dni) REFERENCES Clientes (dni)
+    CONSTRAINT FK_Pedidos_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario)
 );
 
 CREATE TABLE Pedidos_Productos (
-    idPedidosProductos INT UNSIGNED NOT NULL,
     idPedido INT UNSIGNED NOT NULL,
     idProducto INT UNSIGNED NOT NULL,
     cantidad TINYINT UNSIGNED NOT NULL,
-    CONSTRAINT PK_PedidoProducto PRIMARY KEY (idPedidosProductos),
+    CONSTRAINT PK_PedidoProducto PRIMARY KEY (idPedido, idProducto),
     CONSTRAINT FK_Producto FOREIGN KEY (idProducto) REFERENCES Productos (idProducto),
     CONSTRAINT FK_Pedido FOREIGN KEY (idPedido) REFERENCES Pedidos (idPedido)
 );
-
 CREATE TABLE HistorialCompra (
     idProducto INT UNSIGNED NOT NULL,
     idCategoria INT UNSIGNED NOT NULL,
     idPedido INT UNSIGNED NOT NULL,
+    idUsuario BIGINT UNSIGNED NOT NULL,
     idUbicacion INT UNSIGNED NOT NULL,
     precioUnitario MEDIUMINT NOT NULL,
     fecha DATE NOT NULL,
@@ -142,6 +146,7 @@ CREATE TABLE HistorialCompra (
         idCategoria,
         idPedido ASC
     ),
+    CONSTRAINT FK_HistorialCompra_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario),
     CONSTRAINT FK_HistorialCompra_Ubicacion FOREIGN KEY (idUbicacion) REFERENCES Ubicacion (idUbicacion),
     CONSTRAINT FK_HistorialCompra_Productos FOREIGN KEY (idProducto) REFERENCES Productos (idProducto),
     CONSTRAINT FK_HistorialCompra_Categoria FOREIGN KEY (idCategoria) REFERENCES Categorias (idCategoria),
@@ -151,12 +156,14 @@ CREATE TABLE HistorialCompra (
 CREATE TABLE Comprobante (
     numeroDeReferencia INT UNSIGNED AUTO_INCREMENT,
     idPedido INT UNSIGNED NOT NULL,
-    dni CHAR(8) NOT NULL,
+    idUsuario BIGINT UNSIGNED NOT NULL,
     fecha DATE NOT NULL,
+    formaPago VARCHAR(50),
+    estadoPago VARCHAR(50),
     montoTotal MEDIUMINT UNSIGNED NOT NULL,
     CONSTRAINT PK_Comprobante PRIMARY KEY (numeroDeReferencia ASC),
-    CONSTRAINT FK_Comprobante_Pedidos FOREIGN KEY (idPedido) REFERENCES Pedidos (idPedido),
-    CONSTRAINT FK_Comprobante_Clientes FOREIGN KEY (dni) REFERENCES Clientes (dni)
+    CONSTRAINT FK_Comprobante_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario),
+    CONSTRAINT FK_Comprobante_Pedidos FOREIGN KEY (idPedido) REFERENCES Pedidos (idPedido)
 );
 
 CREATE TABLE Envios (

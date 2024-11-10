@@ -1,142 +1,148 @@
-# Base De Datos: Tienda Online.
+<h1 align = "center">BD_TiendaOnline</h1>
+<br>
 
-## Participantes
+<div align = "center">
 
-### Paetz Rodolfo.
-### Martinez Alina.
-### Casimiro Enzo.
-### Zerpa Sebastian.
+# ¿Quienes participaron en su creación? 
+
+</div>
+
+- ### Paetz Rodolfo.
+- ### Martinez Alina.
+- ### Casimiro Enzo.
+- ### Zerpa Sebastian.
 
 
-## DER:
+## Veamos el DER de nuestra base de datos, para asi sintetizar y brindarles el contenido que ofrece:
 
+<div align = "center">
 
 ```mermaid
 erDiagram
 
     Envios {
-        CHAR(7) matricula
+        INT idEnvio PK
+        CHAR(7) matricula FK
         DATETIME fechaEnvio
-        INT idProducto
-        INT idEnvio
+        INT idProducto FK
     }
 
     HistorialCompra {
-        INT idProducto
-        INT idCategoria
-        INT idPedido
-        INT idUbicacion
+        INT idProducto PK
+        INT idCategoria PK
+        INT idPedido PK
+        BIGINT idUsuario FK
+        INT idUbicacion FK
         MEDIUMINT precioUnitario
         DATE fecha
     }
 
     Clientes {
-        CHAR(8) dni
+        CHAR(8) dni PK
         VARCHAR(50) nombre
         VARCHAR(50) apellido
-        BIGINT idUsuario
     }
 
     Valoracion {
-        CHAR(8) idValoracion
+        CHAR(8) idValoracion PK
         FLOAT valoracion
     }
 
     Pedidos {
-        INT idPedido
-        INT idProducto
-        CHAR(8) dni
+        INT idPedido PK
+        INT idProducto FK
+        BIGINT idUsuario FK 
         DATETIME fechaPedido
         VARCHAR(100) direccion
     }
 
     Productos {
-        INT idProducto
+        INT idProducto PK
         VARCHAR(50) nombre
         DECIMAL(10) precio
         INT stock
         VARCHAR(5000) descripcion
-        BIGINT cuil
-        INT idGarantia
-        INT idCategoria
+        BIGINT cuil FK
+        INT idInventario FK
+        INT idGarantia FK 
+        INT idCategoria FK
     }
 
     Ubicacion {
-        INT idUbicacion
+        INT idUbicacion PK
         VARCHAR(40) direccion
         VARCHAR(20) ciudad
-        INT idPais
+        INT idPais FK
     }
 
     Pais {
-        INT idPais
+        INT idPais PK 
         VARCHAR(50) nombre
     }
 
     Inventario {
-        INT idProducto
-        INT idInventario
+        INT idInventario PK
         MEDIUMINT cantidad
         DATE fechaIngreso
     }
 
     Usuario {
-        BIGINT idUsuario
+        BIGINT idUsuario PK
         VARCHAR(20) apodo
         VARCHAR(40) email
         VARCHAR(100) ubicacion
-        INT idPais
+        INT idPais FK
+        CHAR(8) dni FK
     }
 
     Empleados {
-        CHAR(7) matricula
+        CHAR(7) matricula PK
         VARCHAR(50) nombre
         VARCHAR(50) apellido
-        BIGINT cuil
+        BIGINT cuil FK
     }
 
     Empleador {
+        BIGINT cuil PK
         VARCHAR(50) nombre
         VARCHAR(50) apellido
-        BIGINT cuil
     }
 
     Comprobante {
-        INT numeroDeReferencia
-        INT idPedido
-        CHAR(8) dni
+        INT numeroDeReferencia PK
+        INT idPedido FK
+        CHAR(8) dni FK
         DATE fecha
         MEDIUMINT montoTotal
     }
 
     Pedidos_Productos {
-        INT idPedidosProductos
-        INT idPedido
-        INT idProducto
+        INT idPedido PK, FK
+        INT idProducto PK, FK
         TINYINT cantidad
     }
 
     Categorias {
-        INT idCategoria
+        INT idCategoria PK
         VARCHAR(50) nombre
     }
 
     Comentario {
-        INT idComentario
-        BIGINT idUsuario
-        CHAR(8) idValoracion
+        INT idComentario PK
+        BIGINT idUsuario FK
+        CHAR(8) idValoracion FK
         VARCHAR(300) comentario
     }
 
     Carrito {
-        INT idCarrito
+        INT idCarrito PK
         DECIMAL(10) precioTotal
-        INT idProducto
-        INT idPedido
+        INT idProducto FK
+        INT idPedido FK
     }
 
     Garantia {
-        INT idGarantia
+        INT idGarantia PK
         VARCHAR(50) nombre
         DATETIME caducidad
     }
@@ -145,11 +151,11 @@ erDiagram
     Envios }|--|| Empleados: ""
     HistorialCompra ||--o{ Pedidos : ""
     HistorialCompra }o--|| Ubicacion : ""
-    Clientes }o--o| Usuario : ""
-    Clientes ||--o{ Pedidos : ""
-    Clientes ||--o{ Comprobante : ""
+    Clientes |o--o{ Usuario : ""
+    Usuario ||--o{ Pedidos : ""
+    Usuario ||--o{ Comprobante : ""
     Productos }o--o| Categorias : ""
-    Productos ||--o| Garantia : ""
+    Productos ||--o{ Garantia : ""
     Productos ||--o{ Pedidos_Productos: ""
     Pedidos_Productos }|--o| Pedidos : ""
     Pedidos ||--|| Comprobante : ""
@@ -159,12 +165,16 @@ erDiagram
     Empleador ||--o{ Empleados : ""
     Empleador ||--|{ Productos: ""
     Ubicacion }o--|| Pais : ""
-    Productos ||--o{ Inventario : ""
+    Productos }|--o| Inventario : ""
     Carrito ||--o{ Productos : ""
     Carrito ||--|{ Pedidos : ""
+    
 ```
 
-## Consultas SQL: 
+</div>
+
+
+## Un par de consultas Ejemplo sobre nuestra base de datos: 
 
 
 ### 1) Escribe una consulta que muestre el nombre y apellido de cada cliente junto con el número total de pedidos que ha realizado. Agrupa los resultados por el dni del cliente.
