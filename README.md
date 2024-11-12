@@ -148,26 +148,30 @@ erDiagram
     }
 
     Envios }|--|| Ubicacion : ""
+    Carrito ||--|{ Pedidos : ""
+    Productos ||--o{ Garantia : ""
     Envios }|--|| Empleados: ""
     HistorialCompra ||--o{ Pedidos : ""
     HistorialCompra }o--|| Ubicacion : ""
     Clientes |o--o{ Usuario : ""
+    Productos }|--o| Inventario : ""
+    Empleador ||--o{ Empleados : ""
     Usuario ||--o{ Pedidos : ""
     Usuario ||--o{ Comprobante : ""
-    Productos }o--o| Categorias : ""
-    Productos ||--o{ Garantia : ""
     Productos ||--o{ Pedidos_Productos: ""
+    Usuario }o--|| Pais : ""
     Pedidos_Productos }|--o| Pedidos : ""
     Pedidos ||--|| Comprobante : ""
-    Usuario ||--o{ Comentario : ""
-    Usuario }o--|| Pais : ""
     Comentario }o--|| Valoracion : ""
-    Empleador ||--o{ Empleados : ""
     Empleador ||--|{ Productos: ""
-    Ubicacion }o--|| Pais : ""
-    Productos }|--o| Inventario : ""
+    Productos }o--o| Categorias : ""
     Carrito ||--o{ Productos : ""
-    Carrito ||--|{ Pedidos : ""
+    Ubicacion }o--|| Pais : ""
+    Usuario ||--o{ Comentario : ""
+
+
+
+
     
 ```
 
@@ -177,35 +181,22 @@ erDiagram
 ## Un par de consultas Ejemplo sobre nuestra base de datos: 
 
 
-### 1) Escribe una consulta que muestre el nombre y apellido de cada cliente junto con el número total de pedidos que ha realizado. Agrupa los resultados por el dni del cliente.
+### 1) Escribe una consulta que muestre el nombre del usuario junto con el número total de pedidos que ha realizado.
 
 ```sql
 SELECT
-	c.nombre AS nombre_cliente,
-	c.apellido AS apellido_cliente,
-	COUNT(p.idPedido) AS total_pedidos
-FROM Clientes c
-JOIN Pedidos p ON c.dni = p.dni 
-GROUP BY c.dni;
+	U.apodo AS Usuario,
+	COUNT(p.idPedido) AS Total
+FROM Usuario U
+JOIN Pedidos p ON U.idUsuario = p.idUsuario 
+GROUP BY U.idUsuario;
 
 ```
 
-### 2) Escribe una consulta que muestre el nombre de cada empleador junto con el total de productos que ha registrado cuyo precio esté entre $100 y $500. Agrupar por el cuil.
+### 2) Escribe una consulta que muestre el nombre de cada empleador junto con el total de productos que ha registrado cuyo precio esté entre $100 y $500. 
 
 ```sql
-SELECT
-    c.nombre AS nombre_categoria, 
-    COUNT(p.idProducto) AS total_productos
-FROM Categorias c
-JOIN Productos p ON c.idProducto = p.idProducto
-GROUP BY c.nombre;
-
-```
-
-### 3) Escribe una consulta que devuelva el apodo de cada usuario y la valoración promedio de sus comentarios, siempre que la valoración sea mayor a 3. Agrupar los resultados por id usuario.
-
-```sql
-SELECT E.nombre, E.apellido, COUNT(P.idProducto) AS total_productos
+SELECT E.nombre, COUNT(P.idProducto) AS Total
 FROM Empleador E
 LEFT JOIN Productos P ON E.cuil = P.cuil
 WHERE P.precio BETWEEN 100 AND 500
@@ -213,34 +204,45 @@ GROUP BY E.cuil;
 
 ```
 
-### 4) Escribe una consulta que muestre el nombre y apellido de cada cliente junto con el monto total de sus pedidos, solo si ese total es mayor a $500. Utiliza LEFT JOIN para unir Clientes y Pedidos, y agrupa los resultados por dni del cliente. Asegúrate de aplicar la condición del monto mínimo.
+### 3) Escribe una consulta que devuelva el apodo de cada usuario y la valoración promedio de sus comentarios, siempre que la valoración sea mayor a 3. Ordenar de mayor a menor.
+
 
 ```sql
-SELECT C.nombre AS nombre_categoria, COUNT(Pedidos_Productos.idProducto) AS total_vendidos
-FROM Categorias C
-INNER JOIN Productos P ON C.idCategoria = P.idCategoria
-INNER JOIN Pedidos_Productos PeP ON P.idProducto = PeP.idProducto
-GROUP BY C.idCategoria
+SELECT U.apodo, AVG(V.valoracion)
+FROM Usuario U
+INNER JOIN Comentario C ON U.idUsuario = C.idUsuario
+INNER JOIN Valoracion V ON V.idValoracion = C.idValoracion
+WHERE V.valoracion > 3
+GROUP BY apodo, V.idValoracion
+ORDER BY valoracion DESC;
+
+```
+
+### 4) Escribe una consulta que muestre el apodo de cada usuario junto con el monto total de sus pedidos, solo si ese total es mayor a $500. Utiliza LEFT JOIN para unir Usuario y Pedidos. Ordenar de mayor a menor.
+
+```sql
+SELECT U.apodo AS Categoria, P.total AS Vendidos
+FROM Usuario U
+LEFT JOIN Pedidos P ON U.idUsuario = P.idUsuario
+WHERE P.total > 500
 ORDER BY total_vendidos DESC;
 
 ```
 
-### 5) Obtener el nombre del cliente, el total de productos diferentes que ha comprado, el valor promedio de los productos comprados, y la cantidad total de pedidos realizados por cada cliente. Incluir también a aquellos clientes que no hayan realizado pedidos. Mostrar solo los clientes que han comprado más de 2 productos diferentes y cuyo promedio de precio de los productos comprados sea superior a $50. Ordenar el resultado de mayor a menor en base al total de productos diferentes.
-
+### 5) Obtener el apodo del usuario, el total de productos diferentes que ha comprado, el valor promedio de los productos comprados, y la cantidad total de pedidos realizados por cada usuario. Incluir también a aquellos usuarios que no hayan realizado pedidos. Mostrar solo los usuarios que han comprado más de 2 productos diferentes y cuyo promedio de precio de los productos comprados sea superior a $50. Ordenar el resultado de mayor a menor en base al total de productos diferentes.
 
 ```sql
-SELECT C.nombre AS nombre_cliente,
-   	C.apellido AS apellido_cliente,
-   	COUNT(DISTINCT PeP.idProducto) AS productos_diferentes,
-   	AVG(Pr.precio) AS promedio_precio,
-   	COUNT(P.idPedido) AS total_pedidos
-FROM Clientes C
-LEFT JOIN Pedidos P ON C.dni = P.dni
+SELECT U.apodo AS Apodo,
+   	COUNT(DISTINCT PeP.idProducto) AS ProductosD,
+   	AVG(P.total) AS Promedio,
+   	COUNT(P.`idPedido`) AS Total
+FROM Usuario U
+LEFT JOIN Pedidos P ON P.idUsuario = P.idUsuario
 LEFT JOIN Pedidos_Productos PeP ON P.idPedido = PeP.idPedido
 LEFT JOIN Productos Pr ON PeP.idProducto = Pr.idProducto
-WHERE Pr.precio IS NOT NULL
-GROUP BY Clientes.dni
-HAVING productos_diferentes > 2 AND promedio_precio > 50
-ORDER BY productos_diferentes DESC;
+WHERE PeP.idProducto IS NOT NULL
+GROUP BY U.idUsuario
+HAVING ProductosD > 2 AND Promedio > 50 OR COUNT(P.idPedido) = NULL
+ORDER BY ProductosD DESC;
 
 ```

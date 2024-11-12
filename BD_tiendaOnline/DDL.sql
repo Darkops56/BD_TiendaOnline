@@ -114,21 +114,19 @@ CREATE TABLE Productos (
 );
 CREATE TABLE Pedidos (
     idPedido INT UNSIGNED AUTO_INCREMENT,
-    idProducto INT UNSIGNED NOT NULL,
     idUsuario BIGINT UNSIGNED NOT NULL,
     estado varchar(50) NOT NULL,
     fechaPedido DATETIME NOT NULL,
     direccion VARCHAR(100) NOT NULL,
     formaPago VARCHAR(50) NOT NULL,
+    total MEDIUMINT UNSIGNED NOT NULL,
     CONSTRAINT PK_Pedidos PRIMARY KEY (idPedido ASC),
-    CONSTRAINT FK_Pedidos_Productos FOREIGN KEY (idProducto) REFERENCES Productos (idProducto),
     CONSTRAINT FK_Pedidos_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario)
 );
 
 CREATE TABLE Pedidos_Productos (
     idPedido INT UNSIGNED NOT NULL,
     idProducto INT UNSIGNED NOT NULL,
-    cantidad TINYINT UNSIGNED NOT NULL,
     CONSTRAINT PK_PedidoProducto PRIMARY KEY (idPedido, idProducto),
     CONSTRAINT FK_Producto FOREIGN KEY (idProducto) REFERENCES Productos (idProducto),
     CONSTRAINT FK_Pedido FOREIGN KEY (idPedido) REFERENCES Pedidos (idPedido)

@@ -1,4 +1,6 @@
 -- Active: 1731249913115@@127.0.0.1@3306@bd_tiendaonline
+
+
 INSERT INTO Pais (idPais, nombre)
 VALUES 
 (50, 'Chile'), (52, 'Uruguay'), (51, 'Brasil'), (53, 'Bolivia'), (54, 'Paraguay'), 
@@ -31,7 +33,8 @@ VALUES
 (10123472, 'Patricia', 'Fuentes'),
 (10123473, 'Miguel', 'Luna'),
 (10123474, 'Rosa', 'Castro'),
-(10123475, 'Lucía', 'Guerrero');
+(10123475, 'Lucía', 'Guerrero'),
+(10324511, 'Lucho', 'Miranda');
 
 INSERT INTO Garantia (idGarantia, nombre, caducidad, tipoGarantia, condiciones)
 VALUES 
@@ -138,7 +141,11 @@ VALUES
 (7020, 'Tempest', 'tempest@live.com', 'Puerto Príncipe', 66, 10123472),
 (5456, 'Xx_NoobMaster69_xX', 'tugatitauwu69@hotmail.com', 'Perú', 51, 10123472),
 (8371, 'tuleoncita', 'leonaempoderada.mor86@hotmail.com', 'Islas del Kongo', 54, 10123464),
-(2008, 'gatogayowo777', 'tulobita777@gmail.com', 'Argentina', 54, 12345678);
+(2008, 'gatogayowo777', 'tulobita777@gmail.com', 'Argentina', 54, 12345678),
+(3912, 'tugatito', 'gatitoempoderado.txt16@hotmail.com', 'Lima', 54, 10123462);
+
+INSERT INTO Usuario (idUsuario, apodo, email, ubicacion, idPais, dni)
+VALUES (4213, 'fancy', 'fancy84@gmail.com', 'Buenos Aires', 73, 10324511);
 
 INSERT INTO Inventario (idInventario, cantidad, fechaIngreso)
 VALUES 
@@ -163,24 +170,24 @@ VALUES
 
 INSERT INTO Productos (idProducto, nombre, precio, stock, descripcion, cuil, idGarantia, idCategoria, idInventario)
 VALUES 
-(6576, 'Laptop MX100', 320, 100, 'Laptop de 14 pulgadas con 8GB RAM', 123456789, 1162348664, 9013, 6576),
-(6577, 'Monitor HD', 120, 80, 'Monitor de 24 pulgadas Full HD', 123456790, 1162348665, 9014, 6577),
-(6578, 'Cámara Pro', 450, 120, 'Cámara de alta resolución con 4K', 123456791, 1162348666, 9015, 6578),
-(6579, 'Auriculares WZ', 80, 150, 'Auriculares inalámbricos con sonido envolvente', 123456792, 1162348667, 9016, 6579),
-(6580, 'Teclado RGB', 60, 200, 'Teclado mecánico con iluminación RGB', 123456793, 1162348668, 9017, 6580),
-(6581, 'Impresora Láser', 200, 50, 'Impresora láser monocromática', 123456794, 1162348669, 9018, 6581),
-(6582, 'Smart TV 50"', 400, 60, 'Televisor 4K de 50 pulgadas', 123456795, 1162348670, 9019, 6582),
-(6583, 'Aspiradora Smart', 150, 70, 'Aspiradora inteligente con Wi-Fi', 123456796, 1162348671, 9020, 6583),
-(6584, 'Freidora de Aire', 110, 90, 'Freidora sin aceite de 5 litros', 123456797, 1162348672, 9021, 6584),
-(6585, 'Sofá Modular', 300, 100, 'Sofá modular con tres piezas', 123456798, 1162348673, 9022, 6585),
-(6586, 'Auto Modelo X', 18000, 75, 'Auto compacto de 4 puertas', 123456799, 1162348674, 9023, 6586),
-(6587, 'Chaqueta Invierno', 50, 65, 'Chaqueta para invierno con aislamiento', 123456800, 1162348675, 9024, 6587),
-(6588, 'Dron Z-Pro', 250, 130, 'Dron con cámara 1080p y estabilizador', 123456801, 1162348676, 9027, 6588),
-(6589, 'Smartphone Galaxy', 300, 140, 'Smartphone con 64GB de memoria y 6.4" de pantalla', 123456802, 1162348664, 9028, 6589),
-(6590, 'Perfume Classic', 40, 100, 'Perfume de aroma clásico', 123456803, 1162348678, 9029, 6590),
-(4534, 'Smartphone XYZ', 299.99, 85, 'Smartphone de última generación con pantalla de 6.5 pulgadas.', 35678945, 1162348663, 34, 4534),
-(4012, 'Aire Acondicionado Split Inverter Midea Smart', 2999.99, 105, 'Un aire con la capacidad de mantener fresco cualquier ambiente.', 34853151, 1284751238, 35, 4012),
-(2077, 'Cama', 3.99, 125, 'Dormirás muy bien en esta cama probablemente mucho más cara que la tuya, mucho más cómoda que la tuya y mucho más bonita que la tuya', 34853777, 1284751237, 36, 2077);
+(6576, 'Laptop MX100', 320, 100, 'Laptop de 14 pulgadas con 8GB RAM', 123456789, 1162348664, 9013, 10001),
+(6577, 'Monitor HD', 120, 80, 'Monitor de 24 pulgadas Full HD', 123456790, 1162348665, 9014, 10002),
+(6578, 'Cámara Pro', 450, 120, 'Cámara de alta resolución con 4K', 123456791, 1162348666, 9015, 10003),
+(6579, 'Auriculares WZ', 80, 150, 'Auriculares inalámbricos con sonido envolvente', 123456792, 1162348667, 9016, 10014),
+(6580, 'Teclado RGB', 60, 200, 'Teclado mecánico con iluminación RGB', 123456793, 1162348668, 9017, 10004),
+(6581, 'Impresora Láser', 200, 50, 'Impresora láser monocromática', 123456794, 1162348669, 9018, 10003),
+(6582, 'Smart TV 50"', 400, 60, 'Televisor 4K de 50 pulgadas', 123456795, 1162348670, 9019, 10001),
+(6583, 'Aspiradora Smart', 150, 70, 'Aspiradora inteligente con Wi-Fi', 123456796, 1162348671, 9020, 10018),
+(6584, 'Freidora de Aire', 110, 90, 'Freidora sin aceite de 5 litros', 123456797, 1162348672, 9021, 10002),
+(6585, 'Sofá Modular', 300, 100, 'Sofá modular con tres piezas', 123456798, 1162348673, 9022, 10003),
+(6586, 'Auto Modelo X', 18000, 75, 'Auto compacto de 4 puertas', 123456799, 1162348674, 9023, 10012),
+(6587, 'Chaqueta Invierno', 50, 65, 'Chaqueta para invierno con aislamiento', 123456800, 1162348675, 9024, 10009),
+(6588, 'Dron Z-Pro', 250, 130, 'Dron con cámara 1080p y estabilizador', 123456801, 1162348676, 9027, 10013),
+(6589, 'Smartphone Galaxy', 300, 140, 'Smartphone con 64GB de memoria y 6.4" de pantalla', 123456802, 1162348664, 9028, 10004),
+(6590, 'Perfume Classic', 40, 100, 'Perfume de aroma clásico', 123456803, 1162348678, 9029, 10015),
+(4534, 'Smartphone XYZ', 299.99, 85, 'Smartphone de última generación con pantalla de 6.5 pulgadas.', 35678945, 1162348663, 34, 10002),
+(4012, 'Aire Acondicionado Split Inverter Midea Smart', 2999.99, 105, 'Un aire con la capacidad de mantener fresco cualquier ambiente.', 34853151, 1284751238, 35, 10017),
+(2077, 'Cama', 3.99, 125, 'Dormirás muy bien en esta cama probablemente mucho más cara que la tuya, mucho más cómoda que la tuya y mucho más bonita que la tuya', 34853777, 1284751237, 36, 10017);
 
 INSERT INTO Comentario (idComentario, idUsuario, idValoracion, comentario) 
 VALUES 
@@ -243,18 +250,20 @@ INSERT INTO Envios (matricula, fechaEnvio, idProducto) VALUES
 ('G4Y-B09', '2024-03-28 13:50:00', 6584), 
 ('G4Y-B10', '2024-03-29 15:00:00', 6585);
 
-INSERT INTO Pedidos (idPedido, idProducto, idUsuario, estado, fechaPedido, direccion, formaPago) 
+INSERT INTO Pedidos (idPedido, idUsuario, estado, fechaPedido, direccion, formaPago, total) 
 VALUES 
-(1, 6576, 7016, 'Pendiente', '2024-03-10 15:30:00', 'Calle 123, Ciudad A', 'Tarjeta'),
-(2, 6577, 8371, 'Pendiente', '2024-03-11 16:00:00', 'Avenida 456, Ciudad B', 'Efectivo'),
-(3, 6578, 2008, 'Pendiente', '2024-03-12 14:15:00', 'Boulevard 789, Ciudad C', 'Tarjeta'),
-(4, 6579, 7017, 'Pendiente', '2024-03-13 17:30:00', 'Calle 101, Ciudad D', 'Transferencia'),
-(5, 6580, 7015, 'Pendiente', '2024-03-14 13:45:00', 'Avenida 202, Ciudad E', 'Tarjeta'),
-(6, 6581, 7019, 'Pendiente', '2024-03-15 10:00:00', 'Pasaje 303, Ciudad F', 'Efectivo'),
-(7, 6582, 7011, 'Pendiente', '2024-03-16 11:20:00', 'Camino 404, Ciudad G', 'Tarjeta'),
-(8, 6583, 7020, 'Pendiente', '2024-03-17 15:50:00', 'Callejón 505, Ciudad H', 'Transferencia'),
-(9, 6584, 7009, 'Pendiente', '2024-03-18 16:35:00', 'Paseo 606, Ciudad I', 'Efectivo'),
-(10, 6585, 7005, 'Pendiente', '2024-03-19 12:00:00', 'Ruta 707, Ciudad J', 'Tarjeta');
+(1,  7016, 'Pendiente', '2024-03-10 15:30:00', 'Calle 123, Ciudad A', 'Tarjeta', 1000),
+(2, 8371, 'Pendiente', '2024-03-11 16:00:00', 'Avenida 456, Ciudad B', 'Efectivo', 200),
+(3, 2008, 'Pendiente', '2024-03-12 14:15:00', 'Boulevard 789, Ciudad C', 'Tarjeta', 670),
+(4, 7017, 'Pendiente', '2024-03-13 17:30:00', 'Calle 101, Ciudad D', 'Transferencia', 990.99),
+(5, 7015, 'Pendiente', '2024-03-14 13:45:00', 'Avenida 202, Ciudad E', 'Tarjeta', 1040.98),
+(6, 7019, 'Pendiente', '2024-03-15 10:00:00', 'Pasaje 303, Ciudad F', 'Efectivo', 320),
+(7, 7011, 'Pendiente', '2024-03-16 11:20:00', 'Camino 404, Ciudad G', 'Tarjeta', 599.99),
+(8, 7020, 'Pendiente', '2024-03-17 15:50:00', 'Callejón 505, Ciudad H', 'Transferencia', 100),
+(9, 7009, 'Pendiente', '2024-03-18 16:35:00', 'Paseo 606, Ciudad I', 'Efectivo', 671.58),
+(10, 7005, 'Pendiente', '2024-03-19 12:00:00', 'Ruta 707, Ciudad J', 'Tarjeta', 820.87);
+
+
 
 
 INSERT INTO HistorialCompra (idProducto, idCategoria, idPedido, idUbicacion, idUsuario, precioUnitario, fecha) 
@@ -296,20 +305,20 @@ INSERT INTO Carrito (idCarrito, precioTotal, idProducto, idPedido) VALUES
 (9, 110, 6584, 9), 
 (10, 300, 6585, 10); 
 
-INSERT INTO Pedidos_Productos (idPedido, idProducto, cantidad)
+INSERT INTO Pedidos_Productos (idPedido, idProducto)
 VALUES 
-(1, 6576, 2), 
-(1, 6579, 1), 
-(2, 6577, 1), 
-(5, 6580, 1), 
-(10, 6585, 1), 
-(3, 6587, 2), 
-(10, 6586, 1), 
-(8, 6583, 1), 
-(9, 6577, 4), 
-(9, 6584, 2), 
-(7, 6582, 1), 
-(3, 6578, 1), 
-(4, 6579, 1), 
-(6, 6588, 1), 
-(10, 6590, 3);
+(1, 6576), 
+(1, 6579), 
+(2, 6577), 
+(5, 6580), 
+(10, 6585), 
+(3, 6587), 
+(10, 6586), 
+(8, 6583), 
+(9, 6577), 
+(9, 6584), 
+(7, 6582), 
+(3, 6578), 
+(4, 6579), 
+(6, 6588), 
+(10, 6590);
