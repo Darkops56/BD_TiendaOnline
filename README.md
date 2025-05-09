@@ -1,4 +1,4 @@
-<h1 align = "center">BD_TiendaOnline</h1>
+<h1 align = "center">BD_TiendaOnline.</h1>
 <br>
 
 <div align = "center">
