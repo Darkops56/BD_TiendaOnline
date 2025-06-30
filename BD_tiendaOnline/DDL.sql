@@ -104,7 +104,7 @@ CREATE TABLE Carrito (
     precioTotal DECIMAL(10, 2) NOT NULL,
     idProducto INT UNSIGNED NOT NULL,
     CONSTRAINT PK_Carrito PRIMARY KEY (idCarrito),
-    CONSTRAINT PK_Carrito_Productos FOREIGN KEY (idProducto) REFERENCES Productos (idProducto),
+    CONSTRAINT PK_Carrito_Productos FOREIGN KEY (idProducto) REFERENCES Productos (idProducto)
 );
 CREATE TABLE Pedidos (
     idPedido INT UNSIGNED AUTO_INCREMENT,
