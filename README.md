@@ -101,12 +101,6 @@ erDiagram
         BIGINT cuil FK
     }
 
-    Empleador {
-        BIGINT cuil PK
-        VARCHAR(50) nombre
-        VARCHAR(50) apellido
-    }
-
     Comprobante {
         INT numeroDeReferencia PK
         INT idPedido FK
@@ -148,25 +142,24 @@ erDiagram
 
     Envios }|--|| Ubicacion : ""
     Carrito ||--|{ Pedidos : ""
-    Productos ||--o{ Garantia : ""
+    Productos }|--o| Garantia : ""
     Envios }|--|| Empleados: ""
-    HistorialCompra ||--o{ Pedidos : ""
+    HistorialCompra }|--|| Pedidos : ""
     HistorialCompra }o--|| Ubicacion : ""
     Clientes |o--o{ Usuario : ""
     Productos }|--o| Inventario : ""
-    Empleador ||--o{ Empleados : ""
     Usuario ||--o{ Pedidos : ""
     Usuario ||--o{ Comprobante : ""
     Productos ||--o{ Pedidos_Productos: ""
     Usuario }o--|| Pais : ""
     Pedidos_Productos }|--o| Pedidos : ""
-    Pedidos ||--|| Comprobante : ""
+    Pedidos }|--|| Comprobante : ""
     Comentario }o--|| Valoracion : ""
-    Empleador ||--|{ Productos: ""
     Productos }o--o| Categorias : ""
     Carrito ||--o{ Productos : ""
     Ubicacion }o--|| Pais : ""
     Usuario ||--o{ Comentario : ""
+    Envios ||--|| Valoracion : ""
 
 
 

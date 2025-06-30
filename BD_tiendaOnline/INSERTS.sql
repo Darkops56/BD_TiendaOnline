@@ -1,6 +1,3 @@
--- Active: 1731249913115@@127.0.0.1@3306@bd_tiendaonline
-
-
 INSERT INTO Pais (idPais, nombre)
 VALUES 
 (50, 'Chile'), (52, 'Uruguay'), (51, 'Brasil'), (53, 'Bolivia'), (54, 'Paraguay'), 
@@ -61,44 +58,31 @@ VALUES
 (1162348663, 'Express', '2027-07-21', 'Protección', 'Garantía por 2 años que cubre daños por mal uso y caídas accidentales.'),
 (1284751238, 'Express', '2026-06-30', 'Protección', 'Protección ante fallos de hardware por 2 años. No cubre daños por agua.'),
 (1284751237, 'Canon', '2028-06-14', 'Extendida', 'Extiende la garantía estándar por 3 años. Cubre problemas de fabricación y componentes defectuosos.');
-
-
-INSERT INTO Empleador (cuil, nombre, apellido)
+INSERT INTO Empleados (matricula, nombre, apellido, fechaIngreso, salario, puesto, contrato)
 VALUES 
-(123456789, 'Tomás', 'Rossi'), (123456790, 'Renata', 'Vidal'), (123456791, 'Alberto', 'Villalba'), 
-(123456792, 'Natalia', 'Cáceres'), (123456793, 'Esteban', 'Pereira'), (123456794, 'Carolina', 'Blanco'), 
-(123456795, 'Oscar', 'Ríos'), (123456796, 'Luciana', 'Ferrari'), (123456797, 'Ramón', 'Giménez'), 
-(123456798, 'Silvia', 'Paz'), (123456799, 'Joaquín', 'Bravo'), (123456800, 'Marta', 'Leiva'), 
-(123456801, 'Roberto', 'Mendoza'), (123456802, 'Lorena', 'Ibáñez'), (123456803, 'Daniel', 'Palacios'), 
-(123456804, 'Eva', 'Ortiz'), (123456805, 'Claudio', 'Vera'), (123456806, 'Noelia', 'Molina'), 
-(123456807, 'Rafael', 'Cabrera'), (123456808, 'Sandra', 'Ponce'), (35678945, 'Timmy', 'Turner'), 
-(34853151, 'Ana', 'Martínez'), (34853777, 'Vegetta', '777');
-
-INSERT INTO Empleados (matricula, nombre, apellido, fechaIngreso, salario, puesto, contrato, cuil)
-VALUES 
-('G4Y-B01', 'Juan', 'Pérez', '2023-01-15', 3000, 'Desarrollador de Software', '2023-01-15', 123456789),
-('G4Y-B02', 'María', 'López', '2023-02-20', 1500, 'Asistente Administrativo', '2023-02-20', 123456790),
-('G4Y-B03', 'Carlos', 'Sánchez', '2022-06-30', 4500, 'Gerente de Marketing', '2022-06-30', 123456791),
-('G4Y-B04', 'Laura', 'González', '2024-03-01', 2800, 'Diseñadora Gráfica', '2024-03-01', 123456792),
-('G4Y-B05', 'Pedro', 'Hernández', '2023-07-10', 3500, 'Jefe de Ventas', '2023-07-10', 123456793),
-('G4Y-B06', 'Ana', 'Martínez', '2023-11-05', 2200, 'Recepcionista', '2023-11-05', 123456794),
-('G4Y-B07', 'Jorge', 'Díaz', '2023-09-12', 1800, 'Soporte Técnico', '2023-09-12', 123456795),
-('G4Y-B08', 'Lucía', 'Vega', '2023-10-25', 2700, 'Analista de Datos', '2023-10-25', 123456796),
-('G4Y-B09', 'Raúl', 'Flores', '2023-12-01', 3200, 'Contador', '2023-12-01', 123456797),
-('G4Y-B10', 'Paula', 'Silva', '2024-01-05', 3900, 'Gerente de Finanzas', '2024-01-05', 123456798),
-('G4Y-B11', 'Luis', 'Morales', '2023-04-15', 3300, 'Analista de Marketing', '2023-04-15', 123456799),
-('G4Y-B12', 'Inés', 'Ramírez', '2022-08-12', 2500, 'Asistente de Recursos Humanos', '2022-08-12', 123456800),
-('G4Y-B13', 'Manuel', 'Figueroa', '2023-06-05', 4000, 'Director de Proyectos', '2023-06-05', 123456801),
-('G4Y-B14', 'Beatriz', 'Medina', '2023-07-20', 2800, 'Coordinadora de Eventos', '2023-07-20', 123456802),
-('G4Y-B15', 'Diego', 'Ortega', '2023-09-25', 2200, 'Analista de Sistemas', '2023-09-25', 123456803),
-('G4Y-B16', 'Elena', 'Soto', '2023-10-05', 3100, 'Asesora Comercial', '2023-10-05', 123456804),
-('G4Y-B17', 'Santiago', 'Nuñez', '2023-08-30', 2000, 'Vendedor', '2023-08-30', 123456805),
-('G4Y-B18', 'Valeria', 'Paz', '2023-05-15', 2500, 'Diseñadora de Moda', '2023-05-15', 123456806),
-('G4Y-B19', 'Martín', 'Castro', '2023-04-22', 1800, 'Asistente de Ventas', '2023-04-22', 123456807),
-('G4Y-B20', 'Diana', 'Cordero', '2023-02-05', 3100, 'Coordinadora de Proyectos', '2023-02-05', 123456808),
-('G4Y-A57', 'Lucía', 'Martínez', '2024-01-10', 3300, 'Asistente Ejecutivo', '2024-01-10', 35678945),
-('G4Y-A55', 'Lucas', 'Lisandro', '2024-02-18', 3600, 'Líder de Equipo', '2024-02-18', 34853151),
-('G4Y-V77', 'Fabrizio', 'Cuello', '2023-11-22', 4000, 'Director de Tecnología', '2023-11-22', 34853777);
+('G4Y-B01', 'Juan', 'Pérez', '2023-01-15', 3000, 'Desarrollador de Software', '2023-01-15'),
+('G4Y-B02', 'María', 'López', '2023-02-20', 1500, 'Asistente Administrativo', '2023-02-20'),
+('G4Y-B03', 'Carlos', 'Sánchez', '2022-06-30', 4500, 'Gerente de Marketing', '2022-06-30'),
+('G4Y-B04', 'Laura', 'González', '2024-03-01', 2800, 'Diseñadora Gráfica', '2024-03-01'),
+('G4Y-B05', 'Pedro', 'Hernández', '2023-07-10', 3500, 'Jefe de Ventas', '2023-07-10'),
+('G4Y-B06', 'Ana', 'Martínez', '2023-11-05', 2200, 'Recepcionista', '2023-11-05'),
+('G4Y-B07', 'Jorge', 'Díaz', '2023-09-12', 1800, 'Soporte Técnico', '2023-09-12'),
+('G4Y-B08', 'Lucía', 'Vega', '2023-10-25', 2700, 'Analista de Datos', '2023-10-25'),
+('G4Y-B09', 'Raúl', 'Flores', '2023-12-01', 3200, 'Contador', '2023-12-01'),
+('G4Y-B10', 'Paula', 'Silva', '2024-01-05', 3900, 'Gerente de Finanzas', '2024-01-05'),
+('G4Y-B11', 'Luis', 'Morales', '2023-04-15', 3300, 'Analista de Marketing', '2023-04-15'),
+('G4Y-B12', 'Inés', 'Ramírez', '2022-08-12', 2500, 'Asistente de Recursos Humanos', '2022-08-12'),
+('G4Y-B13', 'Manuel', 'Figueroa', '2023-06-05', 4000, 'Director de Proyectos', '2023-06-05'),
+('G4Y-B14', 'Beatriz', 'Medina', '2023-07-20', 2800, 'Coordinadora de Eventos', '2023-07-20'),
+('G4Y-B15', 'Diego', 'Ortega', '2023-09-25', 2200, 'Analista de Sistemas', '2023-09-25'),
+('G4Y-B16', 'Elena', 'Soto', '2023-10-05', 3100, 'Asesora Comercial', '2023-10-05'),
+('G4Y-B17', 'Santiago', 'Nuñez', '2023-08-30', 2000, 'Vendedor', '2023-08-30'),
+('G4Y-B18', 'Valeria', 'Paz', '2023-05-15', 2500, 'Diseñadora de Moda', '2023-05-15'),
+('G4Y-B19', 'Martín', 'Castro', '2023-04-22', 1800, 'Asistente de Ventas', '2023-04-22'),
+('G4Y-B20', 'Diana', 'Cordero', '2023-02-05', 3100, 'Coordinadora de Proyectos', '2023-02-05'),
+('G4Y-A57', 'Lucía', 'Martínez', '2024-01-10', 3300, 'Asistente Ejecutivo', '2024-01-10'),
+('G4Y-A55', 'Lucas', 'Lisandro', '2024-02-18', 3600, 'Líder de Equipo', '2024-02-18'),
+('G4Y-V77', 'Fabrizio', 'Cuello', '2023-11-22', 4000, 'Director de Tecnología', '2023-11-22');
 
 INSERT INTO Valoracion (idValoracion, valoracion)
 VALUES 
@@ -142,10 +126,8 @@ VALUES
 (5456, 'Xx_NoobMaster69_xX', 'tugatitauwu69@hotmail.com', 'Perú', 51, 10123472),
 (8371, 'tuleoncita', 'leonaempoderada.mor86@hotmail.com', 'Islas del Kongo', 54, 10123464),
 (2008, 'gatogayowo777', 'tulobita777@gmail.com', 'Argentina', 54, 12345678),
-(3912, 'tugatito', 'gatitoempoderado.txt16@hotmail.com', 'Lima', 54, 10123462);
-
-INSERT INTO Usuario (idUsuario, apodo, email, ubicacion, idPais, dni)
-VALUES (4213, 'fancy', 'fancy84@gmail.com', 'Buenos Aires', 73, 10324511);
+(3912, 'tugatito', 'gatitoempoderado.txt16@hotmail.com', 'Lima', 54, 10123462),
+(4213, 'fancy', 'fancy84@gmail.com', 'Buenos Aires', 73, 10324511);
 
 INSERT INTO Inventario (idInventario, cantidad, fechaIngreso)
 VALUES 
@@ -168,26 +150,26 @@ VALUES
 (10017, 105, '2024-05-19'), 
 (10018, 125, '2024-06-22');
 
-INSERT INTO Productos (idProducto, nombre, precio, stock, descripcion, cuil, idGarantia, idCategoria, idInventario)
+INSERT INTO Productos (idProducto, nombre, precio, stock, descripcion, idGarantia, idCategoria, idInventario)
 VALUES 
-(6576, 'Laptop MX100', 320, 100, 'Laptop de 14 pulgadas con 8GB RAM', 123456789, 1162348664, 9013, 10001),
-(6577, 'Monitor HD', 120, 80, 'Monitor de 24 pulgadas Full HD', 123456790, 1162348665, 9014, 10002),
-(6578, 'Cámara Pro', 450, 120, 'Cámara de alta resolución con 4K', 123456791, 1162348666, 9015, 10003),
-(6579, 'Auriculares WZ', 80, 150, 'Auriculares inalámbricos con sonido envolvente', 123456792, 1162348667, 9016, 10014),
-(6580, 'Teclado RGB', 60, 200, 'Teclado mecánico con iluminación RGB', 123456793, 1162348668, 9017, 10004),
-(6581, 'Impresora Láser', 200, 50, 'Impresora láser monocromática', 123456794, 1162348669, 9018, 10003),
-(6582, 'Smart TV 50"', 400, 60, 'Televisor 4K de 50 pulgadas', 123456795, 1162348670, 9019, 10001),
-(6583, 'Aspiradora Smart', 150, 70, 'Aspiradora inteligente con Wi-Fi', 123456796, 1162348671, 9020, 10018),
-(6584, 'Freidora de Aire', 110, 90, 'Freidora sin aceite de 5 litros', 123456797, 1162348672, 9021, 10002),
-(6585, 'Sofá Modular', 300, 100, 'Sofá modular con tres piezas', 123456798, 1162348673, 9022, 10003),
-(6586, 'Auto Modelo X', 18000, 75, 'Auto compacto de 4 puertas', 123456799, 1162348674, 9023, 10012),
-(6587, 'Chaqueta Invierno', 50, 65, 'Chaqueta para invierno con aislamiento', 123456800, 1162348675, 9024, 10009),
-(6588, 'Dron Z-Pro', 250, 130, 'Dron con cámara 1080p y estabilizador', 123456801, 1162348676, 9027, 10013),
-(6589, 'Smartphone Galaxy', 300, 140, 'Smartphone con 64GB de memoria y 6.4" de pantalla', 123456802, 1162348664, 9028, 10004),
-(6590, 'Perfume Classic', 40, 100, 'Perfume de aroma clásico', 123456803, 1162348678, 9029, 10015),
-(4534, 'Smartphone XYZ', 299.99, 85, 'Smartphone de última generación con pantalla de 6.5 pulgadas.', 35678945, 1162348663, 34, 10002),
-(4012, 'Aire Acondicionado Split Inverter Midea Smart', 2999.99, 105, 'Un aire con la capacidad de mantener fresco cualquier ambiente.', 34853151, 1284751238, 35, 10017),
-(2077, 'Cama', 3.99, 125, 'Dormirás muy bien en esta cama probablemente mucho más cara que la tuya, mucho más cómoda que la tuya y mucho más bonita que la tuya', 34853777, 1284751237, 36, 10017);
+(6576, 'Laptop MX100', 320, 100, 'Laptop de 14 pulgadas con 8GB RAM', 1162348664, 9013, 10001),
+(6577, 'Monitor HD', 120, 80, 'Monitor de 24 pulgadas Full HD', 1162348665, 9014, 10002),
+(6578, 'Cámara Pro', 450, 120, 'Cámara de alta resolución con 4K', 1162348666, 9015, 10003),
+(6579, 'Auriculares WZ', 80, 150, 'Auriculares inalámbricos con sonido envolvente', 1162348667, 9016, 10014),
+(6580, 'Teclado RGB', 60, 200, 'Teclado mecánico con iluminación RGB', 1162348668, 9017, 10004),
+(6581, 'Impresora Láser', 200, 50, 'Impresora láser monocromática', 1162348669, 9018, 10003),
+(6582, 'Smart TV 50"', 400, 60, 'Televisor 4K de 50 pulgadas', 1162348670, 9019, 10001),
+(6583, 'Aspiradora Smart', 150, 70, 'Aspiradora inteligente con Wi-Fi', 1162348671, 9020, 10018),
+(6584, 'Freidora de Aire', 110, 90, 'Freidora sin aceite de 5 litros', 1162348672, 9021, 10002),
+(6585, 'Sofá Modular', 300, 100, 'Sofá modular con tres piezas', 1162348673, 9022, 10003),
+(6586, 'Auto Modelo X', 18000, 75, 'Auto compacto de 4 puertas', 1162348674, 9023, 10012),
+(6587, 'Chaqueta Invierno', 50, 65, 'Chaqueta para invierno con aislamiento', 1162348675, 9024, 10009),
+(6588, 'Dron Z-Pro', 250, 130, 'Dron con cámara 1080p y estabilizador', 1162348676, 9027, 10013),
+(6589, 'Smartphone Galaxy', 300, 140, 'Smartphone con 64GB de memoria y 6.4" de pantalla', 1162348664, 9028, 10004),
+(6590, 'Perfume Classic', 40, 100, 'Perfume de aroma clásico', 1162348678, 9029, 10015),
+(4534, 'Smartphone XYZ', 299.99, 85, 'Smartphone de última generación con pantalla de 6.5 pulgadas.', 1162348663, 34, 10002),
+(4012, 'Aire Acondicionado Split Inverter Midea Smart', 2999.99, 105, 'Un aire con la capacidad de mantener fresco cualquier ambiente.', 1284751238, 35, 10017),
+(2077, 'Cama', 3.99, 125, 'Dormirás muy bien en esta cama probablemente mucho más cara que la tuya, mucho más cómoda que la tuya y mucho más bonita que la tuya', 1284751237, 36, 10017);
 
 INSERT INTO Comentario (idComentario, idUsuario, idValoracion, comentario) 
 VALUES 

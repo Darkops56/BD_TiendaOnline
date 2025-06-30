@@ -29,14 +29,6 @@ CREATE TABLE Garantia (
     condiciones TEXT NOT NULL,
     CONSTRAINT PK_idGarantia PRIMARY KEY (idGarantia ASC)
 );
-
-CREATE TABLE Empleador (
-    nombre VARCHAR(50) NOT NULL,
-    apellido VARCHAR(50) NOT NULL,
-    cuil BIGINT UNSIGNED,
-    CONSTRAINT PK_Empleador PRIMARY KEY (cuil ASC)
-);
-
 CREATE TABLE Valoracion (
     idValoracion char(8) NOT NULL,
     valoracion FLOAT UNSIGNED NOT NULL,
@@ -50,10 +42,8 @@ CREATE TABLE Empleados (
     puesto VARCHAR(100) NOT NULL,
     fechaIngreso DATE NOT NULL,
     salario INT UNSIGNED NOT NULL,
-    cuil BIGINT UNSIGNED NOT NULL,
     contrato DATE NOT NULL,
-    CONSTRAINT PK_Empleados PRIMARY KEY (matricula ASC),
-    CONSTRAINT FK_Empleados_Empleador FOREIGN KEY (cuil) REFERENCES Empleador (cuil)
+    CONSTRAINT PK_Empleados PRIMARY KEY (matricula ASC)
 );
 
 CREATE TABLE Categorias (
@@ -102,14 +92,12 @@ CREATE TABLE Productos (
     precio DECIMAL(10, 2) NOT NULL,
     stock INT UNSIGNED NOT NULL,
     descripcion VARCHAR(5000),
-    cuil BIGINT UNSIGNED,
     idGarantia INT UNSIGNED,
     idCategoria INT UNSIGNED,
     idInventario INT UNSIGNED NOT NULL,
     CONSTRAINT PK_Productos PRIMARY KEY (idProducto ASC),
     CONSTRAINT FK_Productos_Inventario FOREIGN KEY (idInventario) REFERENCES Inventario (idInventario),
     CONSTRAINT FK_Productos_Categorias FOREIGN KEY (idCategoria) REFERENCES Categorias (idCategoria),
-    CONSTRAINT FK_Productos_Empleador FOREIGN KEY (cuil) REFERENCES Empleador (cuil),
     CONSTRAINT FK_Productos_Garantia FOREIGN KEY (idGarantia) REFERENCES Garantia (idGarantia)
 );
 CREATE TABLE Pedidos (
