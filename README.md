@@ -49,10 +49,13 @@ erDiagram
 
     Pedidos {
         INT idPedido PK
-        INT idProducto FK
+        INT idCarrito FK
         BIGINT idUsuario FK 
         DATETIME fechaPedido
         VARCHAR(100) direccion
+        varchar(50) estado  
+        VARCHAR(50) formaPago
+        MEDIUMINT_UNSIGNED total 
     }
 
     Productos {
@@ -61,7 +64,6 @@ erDiagram
         DECIMAL(10) precio
         INT stock
         VARCHAR(5000) descripcion
-        BIGINT cuil FK
         INT idInventario FK
         INT idGarantia FK 
         INT idCategoria FK
@@ -71,6 +73,8 @@ erDiagram
         INT idUbicacion PK
         VARCHAR(40) direccion
         VARCHAR(20) ciudad
+        varchar(255) provincia 
+        VARCHAR(15) codigoPostal
         INT idPais FK
     }
 
@@ -98,15 +102,20 @@ erDiagram
         CHAR(7) matricula PK
         VARCHAR(50) nombre
         VARCHAR(50) apellido
-        BIGINT cuil FK
+        VARCHAR(100) puesto
+        DATE fechaIngreso
+        INT_UNSIGNED salario
+        DATE contrato
     }
 
     Comprobante {
         INT numeroDeReferencia PK
         INT idPedido FK
-        CHAR(8) dni FK
+        BIGINT idUsuario FK
         DATE fecha
         MEDIUMINT montoTotal
+        VARCHAR(50) formaPago
+        VARCHAR(50) estadoPago 
     }
 
     Pedidos_Productos {
@@ -131,12 +140,13 @@ erDiagram
         INT idCarrito PK
         DECIMAL(10) precioTotal
         INT idProducto FK
-        INT idPedido FK
     }
 
     Garantia {
         INT idGarantia PK
         VARCHAR(50) nombre
+        VARCHAR(255) tipoGarantia
+        VARCHAR(255) condiciones
         DATETIME caducidad
     }
 
