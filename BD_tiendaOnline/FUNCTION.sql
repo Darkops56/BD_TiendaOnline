@@ -1,5 +1,5 @@
 DELIMITER $$
---Devuelve el precio final con un 21% de IVA.
+--Realiza una SF que permita calcular el precio final del envio más el IVA (21%)
 CREATE FUNCTION CalcularPrecioConIVA (
     precio DECIMAL(10,2)
 )
@@ -8,7 +8,7 @@ READS SQL DATA
 BEGIN
     RETURN precio * 1.21;
 END $$
---Retorna el stock actual de un producto.
+--Realiza una funcion que devuelva el stock que tiene un producto.
 CREATE FUNCTION ObtenerStockProducto (
     idP INT
 )
@@ -21,7 +21,7 @@ BEGIN
     WHERE idProducto = idP;
     RETURN resultado;
 END $$
---Devuelve cuántos pedidos hizo un usuario.
+--Realizar un SF que permita saber la cantidad de pedidos hizo un usuario.
 CREATE FUNCTION ObtenerCantidadPedidosPorUsuario (
     idU BIGINT
 )
@@ -34,7 +34,7 @@ BEGIN
     WHERE idUsuario = idU;
     RETURN totalPedidos;
 END $$
---Devuelve la valoración promedio general de todos los productos.
+--Realizar un SF que permita saber el promedio de valoraciones.
 CREATE FUNCTION ObtenerValoracionPromedio ()
 RETURNS FLOAT
 READS SQL DATA
