@@ -1,5 +1,6 @@
+DELIMITER $$
 --Devuelve el precio final con un 21% de IVA.
-CREATE FUNCTION fCalcularPrecioConIVA (
+CREATE FUNCTION CalcularPrecioConIVA (
     precio DECIMAL(10,2)
 )
 RETURNS DECIMAL(10,2)
@@ -8,8 +9,8 @@ BEGIN
     RETURN precio * 1.21;
 END $$
 --Retorna el stock actual de un producto.
-CREATE FUNCTION fn_ObtenerStockProducto (
-    p_idProducto INT
+CREATE FUNCTION ObtenerStockProducto (
+    idP INT
 )
 RETURNS INT
 READS SQL DATA
@@ -17,12 +18,12 @@ BEGIN
     DECLARE resultado INT;
     SELECT stock INTO resultado
     FROM Productos
-    WHERE idProducto = p_idProducto;
+    WHERE idProducto = idP;
     RETURN resultado;
 END $$
 --Devuelve cuántos pedidos hizo un usuario.
-CREATE FUNCTION fn_ObtenerCantidadPedidosPorUsuario (
-    p_idUsuario BIGINT
+CREATE FUNCTION ObtenerCantidadPedidosPorUsuario (
+    idU BIGINT
 )
 RETURNS INT
 READS SQL DATA
@@ -30,7 +31,7 @@ BEGIN
     DECLARE totalPedidos INT;
     SELECT COUNT(*) INTO totalPedidos
     FROM Pedidos
-    WHERE idUsuario = p_idUsuario;
+    WHERE idUsuario = idU;
     RETURN totalPedidos;
 END $$
 --Devuelve la valoración promedio general de todos los productos.
@@ -42,4 +43,4 @@ BEGIN
     SELECT AVG(valoracion) INTO promedio
     FROM Valoracion;
     RETURN promedio;
-END;
+END $$

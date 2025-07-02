@@ -1,15 +1,11 @@
 DROP DATABASE IF EXISTS bd_tiendaOnline;
-
 create database bd_tiendaOnline;
-
 use bd_tiendaOnline;
-
 CREATE TABLE Pais (
     idPais INT UNSIGNED NOT NULL,
     nombre VARCHAR(50) NOT NULL,
     CONSTRAINT PK_Pais PRIMARY KEY (idPais ASC)
 );
-
 CREATE TABLE Ubicacion (
     idUbicacion INT UNSIGNED NOT NULL,
     direccion VARCHAR(40) NOT NULL,
@@ -20,7 +16,6 @@ CREATE TABLE Ubicacion (
     CONSTRAINT PK_Ubicacion PRIMARY KEY (idUbicacion),
     CONSTRAINT FK_UbicacionPais FOREIGN KEY (idPais) REFERENCES Pais (idPais)
 );
-
 CREATE TABLE Garantia (
     idGarantia INT UNSIGNED AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
@@ -44,7 +39,6 @@ CREATE TABLE Empleados (
     contrato DATE NOT NULL,
     CONSTRAINT PK_Empleados PRIMARY KEY (matricula ASC)
 );
-
 CREATE TABLE Categorias (
     idCategoria INT UNSIGNED AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
@@ -67,7 +61,6 @@ CREATE TABLE Usuario (
     CONSTRAINT FK_UsuarioClientes FOREIGN KEY (dni) REFERENCES Clientes(dni),
     CONSTRAINT FK_UsuarioPais FOREIGN KEY (idPais) REFERENCES Pais (idPais)
 );
-
 CREATE TABLE Comentario (
     idComentario INT UNSIGNED NOT NULL,
     idUsuario BIGINT UNSIGNED NOT NULL,
@@ -77,14 +70,12 @@ CREATE TABLE Comentario (
     CONSTRAINT FK_ComentarioUsuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario),
     CONSTRAINT FK_ComentarioValoracion FOREIGN KEY (idValoracion) REFERENCES Valoracion (idValoracion)
 );
-
 CREATE TABLE Inventario (
     idInventario INT UNSIGNED NOT NULL,
     cantidad MEDIUMINT UNSIGNED NOT NULL,
     fechaIngreso DATE NOT NULL,
     CONSTRAINT PK_Inventario PRIMARY KEY (idInventario ASC)
 );
-
 CREATE TABLE Productos (
     idProducto INT UNSIGNED AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
@@ -119,7 +110,6 @@ CREATE TABLE Pedidos (
     CONSTRAINT FK_Pedidos_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario),
     CONSTRAINT FK_Pedidos_Carrito FOREIGN KEY (idCarrito) REFERENCES Carrito (idCarrito)
 );
-
 CREATE TABLE Pedidos_Productos (
     idPedido INT UNSIGNED NOT NULL,
     idProducto INT UNSIGNED NOT NULL,
@@ -146,7 +136,6 @@ CREATE TABLE HistorialCompra (
     CONSTRAINT FK_HistorialCompra_Categoria FOREIGN KEY (idCategoria) REFERENCES Categorias (idCategoria),
     CONSTRAINT FK_HistorialCompra_Pedido FOREIGN KEY (idPedido) REFERENCES Pedidos (idPedido)
 );
-
 CREATE TABLE Comprobante (
     numeroDeReferencia INT UNSIGNED AUTO_INCREMENT,
     idPedido INT UNSIGNED NOT NULL,

@@ -246,15 +246,15 @@ INSERT INTO Carrito (idCarrito, precioTotal, idProducto) VALUES
 INSERT INTO Pedidos (idPedido, idCarrito, idUsuario, estado, fechaPedido, direccion, formaPago, total) 
 VALUES 
 (1, 1, 7016, 'Pendiente', '2024-03-10 15:30:00', 'Calle 123, Ciudad A', 'Tarjeta', 1000),
-(2, 2, 'Pendiente', '2024-03-11 16:00:00', 'Avenida 456, Ciudad B', 'Efectivo', 200),
-(3, 3, 'Pendiente', '2024-03-12 14:15:00', 'Boulevard 789, Ciudad C', 'Tarjeta', 670),
-(4, 4, 'Pendiente', '2024-03-13 17:30:00', 'Calle 101, Ciudad D', 'Transferencia', 990.99),
-(5, 5, 'Pendiente', '2024-03-14 13:45:00', 'Avenida 202, Ciudad E', 'Tarjeta', 1040.98),
-(6, 6, 'Pendiente', '2024-03-15 10:00:00', 'Pasaje 303, Ciudad F', 'Efectivo', 320),
-(7, 7, 'Pendiente', '2024-03-16 11:20:00', 'Camino 404, Ciudad G', 'Tarjeta', 599.99),
-(8, 8, 'Pendiente', '2024-03-17 15:50:00', 'Callejón 505, Ciudad H', 'Transferencia', 100),
-(9, 9, 'Pendiente', '2024-03-18 16:35:00', 'Paseo 606, Ciudad I', 'Efectivo', 671.58),
-(10, 10, 'Pendiente', '2024-03-19 12:00:00', 'Ruta 707, Ciudad J', 'Tarjeta', 820.87);
+(2, 2, 7001, 'Pendiente', '2024-03-11 16:00:00', 'Avenida 456, Ciudad B', 'Efectivo', 200),
+(3, 3, 7002, 'Pendiente', '2024-03-12 14:15:00', 'Boulevard 789, Ciudad C', 'Tarjeta', 670),
+(4, 4, 7003, 'Pendiente', '2024-03-13 17:30:00', 'Calle 101, Ciudad D', 'Transferencia', 990.99),
+(5, 5, 7004, 'Pendiente', '2024-03-14 13:45:00', 'Avenida 202, Ciudad E', 'Tarjeta', 1040.98),
+(6, 6, 7005, 'Pendiente', '2024-03-15 10:00:00', 'Pasaje 303, Ciudad F', 'Efectivo', 320),
+(7, 7, 7006, 'Pendiente', '2024-03-16 11:20:00', 'Camino 404, Ciudad G', 'Tarjeta', 599.99),
+(8, 8, 7007, 'Pendiente', '2024-03-17 15:50:00', 'Callejón 505, Ciudad H', 'Transferencia', 100),
+(9, 9, 7008, 'Pendiente', '2024-03-18 16:35:00', 'Paseo 606, Ciudad I', 'Efectivo', 671.58),
+(10, 10, 7009, 'Pendiente', '2024-03-19 12:00:00', 'Ruta 707, Ciudad J', 'Tarjeta', 820.87);
 
 
 

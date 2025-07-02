@@ -1,42 +1,42 @@
 DELIMITER $$
 --Registra un nuevo producto con inventario, garantía y categoría.
 CREATE PROCEDURE RegistrarNuevoProducto (
-    nombre VARCHAR(50),
-    precio DECIMAL(10, 2),
-    stock INT,
-    Rdescripcion VARCHAR(5000),
-    p_idInventario INT,
-    p_idGarantia INT,
-    p_idCategoria INT
+    Nombre VARCHAR(50),
+    Precio DECIMAL(10, 2),
+    Stock INT,
+    Descripcion VARCHAR(5000),
+    IdInventario INT,
+    IdGarantia INT,
+    IdCategoria INT
 )
 BEGIN
     INSERT INTO Productos (nombre, precio, stock, descripcion, idInventario, idGarantia, idCategoria)
-    VALUES (p_nombre, p_precio, p_stock, p_descripcion, p_idInventario, p_idGarantia, p_idCategoria);
+    VALUES (Nombre, Precio, Stock, Descripcion, IdInventario, IdGarantia, IdCategoria);
 END $$
 --Actualiza el stock de un producto específico.
 CREATE PROCEDURE ActualizarStock (
-    p_idProducto INT,
-    p_nuevoStock INT
+    IdProducto INT,
+    NuevoStock INT
 )
 BEGIN
     UPDATE Productos
-    SET stock = p_nuevoStock
-    WHERE idProducto = p_idProducto;
+    SET stock = NuevoStock
+    WHERE idProducto = IdProducto;
 END $$
 -- Muestra todos los pedidos hechos por un usuario.
 CREATE PROCEDURE ListarPedidosPorUsuario (
-    IN p_idUsuario BIGINT
+    IN IdUsuario BIGINT
 )
 BEGIN
     SELECT * FROM Pedidos
-    WHERE idUsuario = p_idUsuario;
+    WHERE idUsuario = IdUsuario;
 END $$
 --Registra un envío de un producto por parte de un empleado.
 CREATE PROCEDURE RegistrarEnvio (
-    p_matricula CHAR(7),
-    p_idProducto INT
+    Matricula CHAR(7),
+    IdProducto INT
 )
 BEGIN
     INSERT INTO Envios (matricula, fechaEnvio, idProducto)
-    VALUES (p_matricula, NOW(), p_idProducto);
+    VALUES (Matricula, NOW(), IdProducto);
 END $$
