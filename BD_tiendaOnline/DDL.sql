@@ -69,14 +69,11 @@ CREATE TABLE Usuario (
     CONSTRAINT FK_UsuarioPais FOREIGN KEY (idPais) REFERENCES Pais (idPais)
 );
 CREATE TABLE Registro (
-    idRegistro BIGINT UNSIGNED not NULL,
-    idUsuario BIGINT UNSIGNED not NULL AUTO_INCREMENT,
-    nombre VARCHAR(30) not NULL,
-    apellido VARCHAR(30) not NULL,
-    idpais int UNSIGNED not NULL,
+    idRegistro BIGINT UNSIGNED not NULL AUTO_INCREMENT,
+    idUsuario BIGINT UNSIGNED not NULL, 
+    fecha DATE NOT NULL,
     CONSTRAINT PK_IdRegistro PRIMARY KEY (idRegistro ASC),
-    CONSTRAINT PK_IdUsario PRIMARY KEY (idUsuario asc),
-    CONSTRAINT FK_IdusuarioRegistro FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+    CONSTRAINT FK_RegistroUsuario FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
 );
 CREATE TABLE Comentario (
     idComentario INT UNSIGNED NOT NULL,
