@@ -22,31 +22,60 @@ erDiagram
     Envios {
         INT idEnvio PK
         CHAR(7) matricula FK
-        DATETIME fechaEnvio
+        DATETIME fechaEnvio 
         INT idProducto FK
     }
 
     HistorialCompra {
-        INT idProducto PK
-        INT idCategoria PK
-        INT idPedido PK
+        INT idProducto PK, FK
+        INT idCategoria PK, FK
+        INT idPedido PK, FK
         BIGINT idUsuario FK
         INT idUbicacion FK
         MEDIUMINT precioUnitario
         DATE fecha
     }
-
+    Registro{
+        INT idRegistro PK
+        INT idUsuario FK
+        DATETIME fecha
+    
+    }
     Clientes {
         CHAR(8) dni PK
         VARCHAR(50) nombre
         VARCHAR(50) apellido
     }
-
+    Carrito_Productos{
+        INT_UNSIGNED idProducto PK, FK
+        INT_UNSIGNED idCarrito PK, FK
+    }
     Valoracion {
         CHAR(8) idValoracion PK
         FLOAT valoracion
     }
-
+    Venta{
+        BIGINT_UNSIGNED idVenta PK
+        BIGINT_UNSIGNED idUsuario FK
+        DATETIME fecha
+        DECIMAL(10,2) total
+        VARCHAR(50) metodoPago
+        VARCHAR(50) estado
+    }
+    DetalleVenta{
+        BIGINT_UNSIGNED idVenta PK
+        BIGINT_UNSIGNED idUsuario FK
+        DATETIME fecha
+        DECIMAL(10,2) total
+        VARCHAR(50) metodoPago
+        VARCHAR(50) estado
+    }
+    Stock{
+        BIGINT_UNSIGNED stock PK
+        BIGINT_UNSIGNED idProducto FK
+        INT_UNSIGNED cantidad
+        DATETIME fechaActualizacion
+    }
     Pedidos {
         INT idPedido PK
         INT idCarrito FK
@@ -121,7 +150,6 @@ erDiagram
     Pedidos_Productos {
         INT idPedido PK, FK
         INT idProducto PK, FK
-        TINYINT cantidad
     }
 
     Categorias {
