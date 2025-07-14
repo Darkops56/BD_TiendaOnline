@@ -243,6 +243,7 @@ INSERT INTO Carrito (idCarrito, precioTotal, idProducto) VALUES
 (8, 150, 6583), 
 (9, 110, 6584), 
 (10, 300, 6585); 
+
 INSERT INTO Pedidos (idPedido, idCarrito, idUsuario, estado, fechaPedido, direccion, formaPago, total) 
 VALUES 
 (1, 1, 7016, 'Pendiente', '2024-03-10 15:30:00', 'Calle 123, Ciudad A', 'Tarjeta', 1000),
