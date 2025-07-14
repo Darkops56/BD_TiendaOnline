@@ -15,25 +15,21 @@ FOR EACH ROW
 --
 DELIMITER $$
 
-CREATE TRIGGER trg_AfterInsert_Pedido_GeneraComprobante
-AFTER INSERT ON Pedidos
+CREATE TRIGGER AfterInsertPedido AFTER INSERT ON Pedidos
 FOR EACH ROW
 BEGIN
-    CALL sp_GenerarComprobante(NEW.idPedido);
+    CALL GenerarComprobante(NEW.idPedido);
 END $$
 --
 DELIMITER $$
-CREATE TRIGGER trg_AfterInsert_DetalleVenta_ActualizarStock
-AFTER INSERT ON DetalleVenta
+CREATE TRIGGER AfterInsertDetalleVenta AFTER INSERT ON DetalleVenta
 FOR EACH ROW
 BEGIN
-    CALL sp_ActualizarStockProducto(NEW.idProducto, NEW.cantidad);
+    CALL ActualizarStockProducto(NEW.idProducto, NEW.cantidad);
 END $$
 --
 DELIMITER $$
-
-CREATE TRIGGER trg_BeforeInsert_Comentario_VerificaValoracion
-BEFORE INSERT ON Comentario
+CREATE TRIGGER BeforeInsertComentario BEFORE INSERT ON Comentario
 FOR EACH ROW
 BEGIN
     IF NOT EXISTS (
