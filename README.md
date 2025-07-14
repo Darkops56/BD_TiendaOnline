@@ -19,27 +19,39 @@
 ```mermaid
 erDiagram
 
-    Envios {
-        INT idEnvio PK
-        CHAR(7) matricula FK
-        DATETIME fechaEnvio
-        INT idProducto FK
+    Pais {
+        INT idPais PK
+        VARCHAR(50) nombre
     }
 
-    HistorialCompra {
-        INT idProducto PK
-        INT idCategoria PK
-        INT idPedido PK
-        BIGINT idUsuario FK
-        INT idUbicacion FK
-        MEDIUMINT precioUnitario
-        DATE fecha
+    Ubicacion {
+        INT idUbicacion PK
+        VARCHAR(40) direccion
+        VARCHAR(20) ciudad
+        VARCHAR(100) provincia 
+        VARCHAR(15) codigoPostal
+        INT idPais FK
     }
 
     Clientes {
-        CHAR(8) dni PK
+        INT_UNSIGNED idCliente PK
+        CHAR(8) dni 
         VARCHAR(50) nombre
         VARCHAR(50) apellido
+    }
+
+    Usuario {
+        BIGINT idUsuario PK
+        VARCHAR(20) apodo
+        VARCHAR(40) email
+        INT idUbicacion FK
+        INT idCliente FK
+    }
+
+    Registro {
+        BIGINT idRegistro PK
+        BIGINT idUsuario FK
+        DATE fechaRegistro
     }
 
     Valoracion {
@@ -47,55 +59,11 @@ erDiagram
         FLOAT valoracion
     }
 
-    Pedidos {
-        INT idPedido PK
-        INT idCarrito FK
-        BIGINT idUsuario FK 
-        DATETIME fechaPedido
-        VARCHAR(100) direccion
-        varchar(50) estado  
-        VARCHAR(50) formaPago
-        MEDIUMINT_UNSIGNED total 
-    }
-
-    Productos {
-        INT idProducto PK
-        VARCHAR(50) nombre
-        DECIMAL(10) precio
-        INT stock
-        VARCHAR(5000) descripcion
-        INT idInventario FK
-        INT idGarantia FK 
-        INT idCategoria FK
-    }
-
-    Ubicacion {
-        INT idUbicacion PK
-        VARCHAR(40) direccion
-        VARCHAR(20) ciudad
-        varchar(255) provincia 
-        VARCHAR(15) codigoPostal
-        INT idPais FK
-    }
-
-    Pais {
-        INT idPais PK 
-        VARCHAR(50) nombre
-    }
-
-    Inventario {
-        INT idInventario PK
-        MEDIUMINT cantidad
-        DATE fechaIngreso
-    }
-
-    Usuario {
-        BIGINT idUsuario PK
-        VARCHAR(20) apodo
-        VARCHAR(40) email
-        VARCHAR(100) ubicacion
-        INT idPais FK
-        CHAR(8) dni FK
+    Comentario {
+        INT idComentario PK
+        BIGINT idUsuario FK
+        CHAR(8) idValoracion FK
+        VARCHAR(300) comentario
     }
 
     Empleados {
@@ -108,20 +76,18 @@ erDiagram
         DATE contrato
     }
 
-    Comprobante {
-        INT numeroDeReferencia PK
-        INT idPedido FK
-        BIGINT idUsuario FK
-        DATE fecha
-        MEDIUMINT montoTotal
-        VARCHAR(50) formaPago
-        VARCHAR(50) estadoPago 
+    Inventario {
+        INT idInventario PK
+        MEDIUMINT cantidad
+        DATE fechaIngreso
     }
 
-    Pedidos_Productos {
-        INT idPedido PK, FK
-        INT idProducto PK, FK
-        TINYINT cantidad
+    Garantia {
+        INT idGarantia PK
+        VARCHAR(50) nombre
+        VARCHAR(100) tipoGarantia
+        DATETIME caducidad  
+        VARCHAR(100) condiciones
     }
 
     Categorias {
@@ -129,49 +95,121 @@ erDiagram
         VARCHAR(50) nombre
     }
 
-    Comentario {
-        INT idComentario PK
-        BIGINT idUsuario FK
-        CHAR(8) idValoracion FK
-        VARCHAR(300) comentario
+    Productos {
+        INT idProducto PK
+        VARCHAR(50) nombre
+        DECIMAL(10_2) precio
+        VARCHAR(5000) descripcion
+        INT idInventario FK
+        INT idGarantia FK 
+        INT idCategoria FK
+    }
+
+    Stock {
+        BIGINT_UNSIGNED idStock PK
+        INT_UNSIGNED idProducto FK
+        INT_UNSIGNED cantidad
+        DATETIME fechaActualizacion
     }
 
     Carrito {
         INT idCarrito PK
-        DECIMAL(10) precioTotal
+        DECIMAL(10_2) precioTotal
+        INT idProducto FK
+        INT idUsuario FK
+    }
+
+    Carrito_Productos {
+        INT idProducto PK, FK
+        INT idCarrito PK, FK
+    }
+
+    Pedidos {
+        INT idPedido PK
+        BIGINT idUsuario FK
+        INT idCarrito FK
+        DATETIME fechaPedido
+        VARCHAR(100) direccion
+        VARCHAR(50) estado  
+        VARCHAR(50) formaPago
+        MEDIUMINT_UNSIGNED total 
+    }
+
+    Pedidos_Productos {
+        INT idPedido PK, FK
+        INT idProducto PK, FK
+    }
+
+    HistorialCompra {
+        INT idProducto PK
+        INT idCategoria PK
+        INT idPedido PK
+        BIGINT idUsuario FK
+        INT idUbicacion FK
+        MEDIUMINT precioUnitario
+        DATE fecha
+    }
+
+    Comprobante {
+        INT numeroDeReferencia PK
+        INT idPedido FK
+        BIGINT idUsuario FK
+        DATE fecha
+        VARCHAR(50) formaPago
+        VARCHAR(50) estadoPago
+        MEDIUMINT montoTotal
+    }
+
+    Envios {
+        INT idEnvio PK
+        CHAR(7) matricula FK
+        DATETIME fechaEnvio
         INT idProducto FK
     }
 
-    Garantia {
-        INT idGarantia PK
-        VARCHAR(50) nombre
-        VARCHAR(255) tipoGarantia
-        VARCHAR(255) condiciones
-        DATETIME caducidad
+    Venta {
+        BIGINT_UNSIGNED idVenta PK
+        BIGINT_UNSIGNED idUsuario FK
+        DATETIME fecha
+        DECIMAL(10) total
+        VARCHAR(50) metodoPago
+        VARCHAR(50) estado
     }
 
-    Envios }|--|| Ubicacion : ""
-    Carrito ||--|{ Pedidos : ""
-    Productos }|--o| Garantia : ""
-    Envios }|--|| Empleados: ""
-    HistorialCompra }|--|| Pedidos : ""
-    HistorialCompra }o--|| Ubicacion : ""
-    Clientes |o--o{ Usuario : ""
-    Productos }|--o| Inventario : ""
-    Usuario ||--o{ Pedidos : ""
-    Usuario ||--o{ Comprobante : ""
-    Productos ||--o{ Pedidos_Productos: ""
-    Usuario }o--|| Pais : ""
-    Pedidos_Productos }|--o| Pedidos : ""
-    Pedidos }|--|| Comprobante : ""
-    Comentario }o--|| Valoracion : ""
-    Productos }o--o| Categorias : ""
-    Carrito ||--o{ Productos : ""
-    Ubicacion }o--|| Pais : ""
-    Usuario ||--o{ Comentario : ""
-    Envios ||--|| Valoracion : ""
+    DetalleVenta {
+        BIGINT_UNSIGNED idDetalle PK
+        BIGINT_UNSIGNED idVenta FK
+        INT_UNSIGNED idProducto FK
+        INT_UNSIGNED cantidad
+        DECIMAL(10_2) precioUnitario
+    }
 
-
+    Pais ||--o{ Ubicacion : contiene
+    Ubicacion ||--o{ Usuario : tiene
+    Clientes ||--o{ Usuario : registrado
+    Usuario ||--o{ Registro : genera
+    Usuario ||--o{ Comentario : escribe
+    Valoracion ||--o{ Comentario : califica
+    Usuario ||--o{ Pedidos : realiza
+    Usuario ||--o{ Comprobante : recibe
+    Usuario ||--o{ Venta : realiza
+    Empleados ||--o{ Envios : realiza
+    Productos ||--|| Envios : enviado
+    Inventario ||--o{ Productos : provee
+    Garantia ||--o{ Productos : cubre
+    Categorias ||--o{ Productos : agrupa
+    Productos ||--o{ Stock : gestiona
+    Productos ||--o{ DetalleVenta : vendido_en
+    Venta ||--o{ DetalleVenta : incluye
+    Carrito ||--o{ Carrito_Productos : contiene
+    Productos ||--o{ Carrito_Productos : "está_en"
+    Carrito ||--o{ Pedidos : usado_en
+    Pedidos ||--o{ Pedidos_Productos : incluye
+    Productos ||--o{ Pedidos_Productos : parte_de
+    Pedidos ||--|| Comprobante : comprobado_por
+    HistorialCompra ||--|| Pedidos : historizado
+    HistorialCompra ||--|| Productos : refiere_a
+    HistorialCompra ||--|| Ubicacion : entregado_en
 
 
     

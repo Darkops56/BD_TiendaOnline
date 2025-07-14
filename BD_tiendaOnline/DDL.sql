@@ -198,4 +198,4 @@ CREATE TABLE Stock (
     fechaActualizacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (idStock),
     FOREIGN KEY (idProducto) REFERENCES Productos(idProducto)
-);
+);  
