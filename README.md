@@ -233,15 +233,7 @@ GROUP BY U.idUsuario;
 
 ```
 
-### 2)Mostrá los 3 productos que más se vendieron (según cantidad de veces que aparecen en pedidos) junto con:
-
-    su nombre
-
-    el número de veces vendido
-
-    el precio unitario promedio
-
-    y el total recaudado (precio unitario × veces vendido)
+### 2)Mostrá los 3 productos que más se vendieron (según cantidad de veces que aparecen en pedidos) junto con: su nombre, el número de veces vendido, el precio unitario promedio y el total recaudado (precio unitario × veces vendido)
 ```sql
 SELECT 
     P.nombre AS Producto,
@@ -299,4 +291,224 @@ GROUP BY U.idUsuario
 HAVING ProductosDiferentes > 2 AND PromedioPrecioProductos > 50
 ORDER BY ProductosDiferentes DESC;
 
+```
+## Stored Procedure: Consultas
+
+### Realizar un SP que permita dar de alta un nuevo producto.
+```sql
+DELIMITER $$
+CREATE PROCEDURE RegistrarUsuario(
+    Dni CHAR(8),
+    NombreCliente VARCHAR(50),
+    ApellidoCliente VARCHAR(50),
+    Apodo VARCHAR(20),
+    Email VARCHAR(40),
+    IdUbicacion INT
+)
+BEGIN
+    INSERT INTO Clientes (dni, nombre, apellido) VALUES (Dni, NombreCliente, ApellidoCliente);
+    INSERT INTO Usuario (apodo, email, idUbicacion, idCliente) VALUES (Apodo, Email, IdUbicacion, LAST_INSERT_ID());
+END $$
+```
+
+### Realizar un SP que permita actualizar el stock de un producto.
+```sql
+DELIMITER $$
+CREATE PROCEDURE ActualizarStockProducto(
+    IdProducto INT,
+    CantidadVendida INT
+)
+BEGIN
+    UPDATE Stock
+    SET cantidad = cantidad - CantidadVendida,
+        fechaActualizacion = CURRENT_TIMESTAMP
+    WHERE idProducto = IdProducto;
+END $$
+```
+### Generar comprobante
+```sql
+DELIMITER $$
+CREATE PROCEDURE GenerarComprobante(IdPedido INT)
+BEGIN
+    DECLARE IdUsuario BIGINT;
+    DECLARE FormaPago VARCHAR(50);
+    DECLARE Total MEDIUMINT;
+
+    SELECT idUsuario, formaPago, total INTO IdUsuario, FormaPago, Total
+    FROM Pedidos
+    WHERE idPedido = IdPedido;
+
+    INSERT INTO Comprobante (idPedido, idUsuario, fecha, formaPago, estadoPago, montoTotal)
+    VALUES (IdPedido, IdUsuario, CURDATE(), FormaPago, 'Pagado', Total);
+END $$
+```
+
+### Realizar un SP que registre un nuevo envio.
+```sql
+DELIMITER $$
+CREATE PROCEDURE HistorialDeUsuario(IdUsuario BIGINT)
+BEGIN
+    SELECT hc.fecha, p.nombre AS producto, hc.precioUnitario, c.nombre AS categoria
+    FROM HistorialCompra hc
+    JOIN Productos p USING (`idProducto`)
+    JOIN Categorias c USING (`idCategoria`)
+    WHERE hc.idUsuario = p_idUsuario;
+END $$
+```
+## Stored Functions: Consultas
+
+### Realiza una SF que permita calcular el precio final del envio más el IVA (21%)
+```sql
+DELIMITER $$
+CREATE FUNCTION CalcularTotalPedido(IdPedido INT) RETURNS DECIMAL(10,2)
+READS SQL DATA
+BEGIN
+    DECLARE Totalidad DECIMAL(10,2);
+    SELECT SUM(precioUnitario) INTO Totalidad
+    FROM Pedidos_Productos pp
+    JOIN Productos pr USING (`idProducto`)
+    WHERE pp.idPedido = IdPedido;
+    RETURN Totalidad;
+END $$
+```
+### Realiza una funcion que devuelva el stock que tiene un producto.
+```sql
+DELIMITER $$
+CREATE FUNCTION EstadoPago(IdPedido INT) RETURNS VARCHAR(50)
+READS SQL DATA
+BEGIN
+    DECLARE EstadoDelPago VARCHAR(50);
+    SELECT estadoPago INTO EstadoDelPago
+    FROM Comprobante
+    WHERE idPedido = IdPedido;
+    RETURN EstadoDelPago;
+END $$
+```
+
+### Realizar un SF que permita saber la cantidad de pedidos hizo un usuario.
+```sql
+DELIMITER $$
+CREATE FUNCTION StockDisponible(IdProducto INT) RETURNS INT
+READS SQL DATA
+BEGIN
+    DECLARE Stocks INT;
+    SELECT cantidad INTO Stocks FROM Stock WHERE idProducto = IdProducto;
+    RETURN Stocks;
+END $$
+```
+
+### Realizar un SF que permita saber el promedio de valoraciones.
+```sql
+DELIMITER $$
+CREATE FUNCTION UsuarioTienePedidos(IdUsuario BIGINT) RETURNS BOOLEAN
+READS SQL DATA
+BEGIN
+    DECLARE cantidadDePedidos INT;
+    SELECT COUNT(*) INTO cantidadDePedidos FROM Pedidos WHERE idUsuario = IdUsuario;
+    RETURN cantidadDePedidos > 0;
+END $$
+```
+###
+```sql
+DELIMITER $$
+CREATE FUNCTION CalificacionPromedio(IdUsuario BIGINT) RETURNS FLOAT
+READS SQL DATA
+BEGIN
+    DECLARE Promedio FLOAT;
+    SELECT AVG(v.valoracion)
+    INTO Promedio
+    FROM Comentario c
+    JOIN Valoracion v USING (`idValoracion`)
+    WHERE c.idUsuario = IdUsuario;
+    RETURN Promedio;
+END $$
+```
+## Triggers: Excepciones
+
+### Realizar un trigger que valide los mails que se registran a Usuario no sean iguales a uno que ya exista.
+```sql
+CREATE TRIGGER befInsertUsuario BEFORE INSERT ON Usuario
+FOR EACH ROW
+    begin
+        SELECT email INTO @mails
+        FROM `Usuario`;
+
+        IF(NEW.email === @mails)
+        THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = "Mail ya registrado";
+    END $$
+```
+
+### 
+
+```sql
+DELIMITER $$
+CREATE TRIGGER AfterInsertPedido AFTER INSERT ON Pedidos
+FOR EACH ROW
+BEGIN
+    CALL GenerarComprobante(NEW.idPedido);
+END $$
+```
+
+### 
+```sql
+DELIMITER $$
+CREATE TRIGGER AfterInsertDetalleVenta AFTER INSERT ON DetalleVenta
+FOR EACH ROW
+BEGIN
+    CALL ActualizarStockProducto(NEW.idProducto, NEW.cantidad);
+END $$
+```
+
+###
+```sql
+DELIMITER $$
+CREATE TRIGGER BeforeInsertComentario BEFORE INSERT ON Comentario
+FOR EACH ROW
+BEGIN
+    IF NOT EXISTS (
+        SELECT * FROM Valoracion WHERE idValoracion = NEW.idValoracion
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Valoración no válida';
+    END IF;
+END $$
+```
+
+### Realizar un trigger que no permita ingresar valoraciones mayores a 5.
+```sql
+CREATE TRIGGER befInsertValoracion BEFORE INSERT ON Valoracion
+FOR EACH ROW
+    BEGIN
+        IF(
+        SELECT *
+        FROM Comentario 
+        WHERE idValoracion = NEW.idValoracion
+        AND NEW.valoracion > 5;
+        ) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = "La valoracion no puede ser mayor a 5";
+    END $$
+```
+### Realizar un trigger que haga un alta en comprobante despues de un insert en pedido.
+```sql
+DELIMITER $$
+CREATE TRIGGER afInsertPedido AFTER INSERT ON Pedido
+FOR EACH ROW
+    BEGIN
+        INSERT INTO Comprobante(idPedido, idUsuario, fecha, formaPago, estadoPago, montoTotal)
+                    VALUES(NEW.idPedido, NEW.idUsuario, NOW(), NEW.formaPago, NEW.estado, NEW.total);
+    END $$
+```
+
+### Realizar una validacion al dar de alta Garantia, que no permita ingresar una fecha de caducidad inferior a la fecha actual.
+```sql
+CREATE TRIGGER befInsertGarantia BEFORE INSERT ON Garantia
+FOR EACH ROW
+    begin
+        IF(NEW.caducidad < NOW()) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = "La fecha de caducidad no puede ser menor a la actual";
+    END $$
 ```

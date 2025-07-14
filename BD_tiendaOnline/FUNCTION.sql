@@ -19,7 +19,7 @@ BEGIN
     FROM Comprobante
     WHERE idPedido = IdPedido;
     RETURN EstadoDelPago;
-END$$
+END $$
 --Realizar un SF que permita saber la cantidad de pedidos hizo un usuario.
 CREATE FUNCTION StockDisponible(IdProducto INT) RETURNS INT
 READS SQL DATA
