@@ -294,9 +294,10 @@ ORDER BY ProductosDiferentes DESC;
 ```
 ## Stored Procedure: Consultas
 
-### Realizar un SP que permita dar de alta un nuevo producto.
+### Crear un procedimiento almacenado que registre un cliente y su usuario asociado
 ```sql
 DELIMITER $$
+
 CREATE PROCEDURE RegistrarUsuario(
     Dni CHAR(8),
     NombreCliente VARCHAR(50),
