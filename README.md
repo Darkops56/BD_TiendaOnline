@@ -292,9 +292,9 @@ HAVING ProductosDiferentes > 2 AND PromedioPrecioProductos > 50
 ORDER BY ProductosDiferentes DESC;
 
 ```
-## Stored Procedure: Consultas
+## Stored Procedure: Consignas y desarrollo
 
-### Crear un procedimiento almacenado que registre un cliente y su usuario asociado
+### Crear un SP que registre un cliente y su usuario asociado
 ```sql
 DELIMITER $$
 
@@ -326,7 +326,7 @@ BEGIN
     WHERE idProducto = IdProducto;
 END $$
 ```
-### Generar comprobante
+### Realizar un SP qel cual haga un alta en comprobante
 ```sql
 DELIMITER $$
 CREATE PROCEDURE GenerarComprobante(IdPedido INT)
@@ -356,7 +356,7 @@ BEGIN
     WHERE hc.idUsuario = p_idUsuario;
 END $$
 ```
-## Stored Functions: Consultas
+## Stored Functions: Consignas y desarrollo
 
 ### Realiza una SF que permita calcular el precio final del envio más el IVA (21%)
 ```sql
@@ -424,7 +424,7 @@ BEGIN
     RETURN Promedio;
 END $$
 ```
-## Triggers: Excepciones
+## Triggers: Consignas y desarrollo
 
 ### Realizar un trigger que valide los mails que se registran a Usuario no sean iguales a uno que ya exista.
 ```sql
