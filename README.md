@@ -326,7 +326,7 @@ BEGIN
     WHERE idProducto = IdProducto;
 END $$
 ```
-### Realizar un SP qel cual haga un alta en comprobante
+### Realizar un SP el cual haga un alta en comprobante
 ```sql
 DELIMITER $$
 CREATE PROCEDURE GenerarComprobante(IdPedido INT)
