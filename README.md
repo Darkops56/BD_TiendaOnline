@@ -409,7 +409,7 @@ BEGIN
     RETURN cantidadDePedidos > 0;
 END $$
 ```
-###
+### Crear una función que retorne el promedio de las valoraciones recibidas en sus comentarios.
 ```sql
 DELIMITER $$
 CREATE FUNCTION CalificacionPromedio(IdUsuario BIGINT) RETURNS FLOAT
@@ -441,7 +441,7 @@ FOR EACH ROW
     END $$
 ```
 
-### 
+### Crear un trigger que genere un comprobante al crear un pedido.
 
 ```sql
 DELIMITER $$
@@ -452,7 +452,7 @@ BEGIN
 END $$
 ```
 
-### 
+### Crear un trigger que descuente stock al agregar un detalle de venta.
 ```sql
 DELIMITER $$
 CREATE TRIGGER AfterInsertDetalleVenta AFTER INSERT ON DetalleVenta
@@ -462,7 +462,7 @@ BEGIN
 END $$
 ```
 
-###
+### Crear un trigger que, antes de insertar un comentario, valide que el idValoracion ingresado exista en la tabla Valoracion, y si no existe, cancele la operación que diga "Valoracion no válida"
 ```sql
 DELIMITER $$
 CREATE TRIGGER BeforeInsertComentario BEFORE INSERT ON Comentario
